@@ -25,7 +25,10 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 <a href="https://github.com/daniel-rajakumar/CanogaGame"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-canoga-dark.svg"><img alt="Canoga Game, a dice-and-strategy board game" src="assets/card-canoga-light.svg" width="49%"></picture></a>
 </p>
 
-<p align="center"><sub>Try them live: <a href="https://rockygpt.danielrajakumar.com">RockyGPT</a> · <a href="https://projects.canogagame.danielrajakumar.com">Canoga Game</a></sub></p>
+<p align="center">
+<a href="https://rockygpt.danielrajakumar.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chip-rockygpt-dark.svg"><img alt="Try RockyGPT, live" src="assets/chip-rockygpt-light.svg"></picture></a>
+<a href="https://projects.canogagame.danielrajakumar.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chip-canoga-dark.svg"><img alt="Try Canoga Game, live" src="assets/chip-canoga-light.svg"></picture></a>
+</p>
 
 ## Tools I use
 

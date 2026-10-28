@@ -197,11 +197,11 @@ def glass(t: dict, x: float, y: float, w: float, h: float, rx: float, delay: flo
       <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="{t['sheen']}"/>
       <stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
-    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="140%">
-      <feGaussianBlur stdDeviation="10"/>
+    <filter id="glassShadow" x="-50%" y="-50%" width="200%" height="250%">
+      <feGaussianBlur stdDeviation="5"/>
     </filter>
-    <mask id="glassOutside">
-      <rect width="100%" height="100%" fill="#FFF"/>
+    <mask id="glassOutside" maskUnits="userSpaceOnUse" x="-5000" y="-5000" width="10000" height="10000">
+      <rect x="-5000" y="-5000" width="10000" height="10000" fill="#FFF"/>
       <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#000"/>
     </mask>
     <clipPath id="glassClip"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}"/></clipPath>"""
@@ -209,7 +209,7 @@ def glass(t: dict, x: float, y: float, w: float, h: float, rx: float, delay: flo
       .sheen {{ animation: sheen 9s ease-in-out infinite; animation-delay: {delay:g}s; }}
       @keyframes sheen {{ 0%, 55% {{ transform: translateX(-{w:g}px) }} 100% {{ transform: translateX({w:g}px) }} }}"""
     under = f"""
-  <rect x="{x}" y="{y + 6}" width="{w}" height="{h}" rx="{rx}" fill="#000" fill-opacity="{t['shadow_op']}" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
+  <rect x="{x}" y="{y + 4}" width="{w}" height="{h}" rx="{rx}" fill="#000" fill-opacity="{t['shadow_op']}" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
   <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="url(#glassFill)"/>
   <g clip-path="url(#glassClip)"><rect class="sheen" x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#glassSheen)"/></g>"""
     over = f"""
@@ -361,6 +361,30 @@ def card(p: dict, t: dict) -> str:
 """
 
 
+def chip(p: dict, t: dict) -> str:
+    """A small glass "Try it" chip that links to a live project, shown under the cards."""
+    label = f"Try {p['name']}"
+    w = round(len(label) * 8.6 + 82)
+    g_defs, g_style, g_under, g_over = glass(t, 8, 6, w - 16, 36, 18, delay=PROJECTS.index(p) * 1.5)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} 58" width="{w}" height="58" role="img" aria-label="{html.escape(label)}, live">
+  <title>{html.escape(label)}</title>
+  <defs>{g_defs}
+    <style>{g_style}
+      .label {{ font: 600 15px {SANS}; fill: {t['text']}; }}
+      .arrow {{ font: 600 15px {SANS}; fill: {t['green']}; }}
+      .dot {{ fill: {t['green']}; }}
+      .ping {{ fill: {t['green']}; transform-origin: 30px 24px; animation: ping 1.8s ease-out infinite; }}
+      @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.6); opacity: 0 }} }}
+      @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
+    </style>
+  </defs>{g_under}
+  <circle class="ping" cx="30" cy="24" r="4.5"/><circle class="dot" cx="30" cy="24" r="4.5"/>
+  <text class="label" x="44" y="29.5">{html.escape(label)}</text>
+  <text class="arrow" x="{w - 34}" y="29.5">↗</text>{g_over}
+</svg>
+"""
+
+
 def main() -> None:
     root = Path(__file__).resolve().parent.parent / "assets"
     root.mkdir(exist_ok=True)
@@ -369,6 +393,8 @@ def main() -> None:
         (root / f"hero-{name}.svg").write_text(hero(theme, status))
         for p in PROJECTS:
             (root / f"card-{p['slug']}-{name}.svg").write_text(card(p, theme))
+            if p["live"]:
+                (root / f"chip-{p['slug']}-{name}.svg").write_text(chip(p, theme))
 
 
 if __name__ == "__main__":
