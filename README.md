@@ -36,8 +36,8 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 ## 📈 My year in code
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg">
-  <img alt="My GitHub contributions as a 3D city, updated daily" src="profile-3d-contrib/profile-green-animate.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="generated/snake-dark.svg">
+  <img alt="A snake eating my GitHub contribution graph, updated daily" src="generated/snake-light.svg" width="100%">
 </picture>
 
 ## 🌙 Outside of code
