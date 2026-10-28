@@ -28,7 +28,7 @@
       <feGaussianBlur stdDeviation="10"/>
     </filter>
     <mask id="glassOutside">
-      <rect width="100%" height="100%" fill="#FFF"/>
+      <rect x="-5000" y="-5000" width="10000" height="10000" fill="#FFF"/>
       <rect x="12" y="8" width="396" height="212" rx="20" fill="#000"/>
     </mask>
     <clipPath id="glassClip"><rect x="12" y="8" width="396" height="212" rx="20"/></clipPath>

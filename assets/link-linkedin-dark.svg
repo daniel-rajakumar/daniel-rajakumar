@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 92" width="300" height="92" role="img" aria-label="LinkedIn">
+  <title>LinkedIn</title>
+  <defs>
+    <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.025"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.225"/>
+    </linearGradient>
+    <linearGradient id="glassSpec" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="0.7" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0.35" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.07"/>
+      <stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <mask id="glassOutside">
+      <rect x="-5000" y="-5000" width="10000" height="10000" fill="#FFF"/>
+      <rect x="10" y="8" width="280" height="66" rx="33" fill="#000"/>
+    </mask>
+    <clipPath id="glassClip"><rect x="10" y="8" width="280" height="66" rx="33"/></clipPath>
+    <style>
+      .sheen { animation: sheen 9s ease-in-out infinite; animation-delay: 1.6s; }
+      @keyframes sheen { 0%, 55% { transform: translateX(-280px) } 100% { transform: translateX(280px) } }
+      .label { font: 600 21px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #FAFAFA; }
+      .dot { fill: #1DB954; }
+      .ping { fill: #1DB954; animation: ping 1.8s ease-out infinite; }
+      @keyframes ping { from { transform: scale(1); opacity: .6 } to { transform: scale(2.6); opacity: 0 } }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+    </style>
+  </defs>
+  <rect x="10" y="14" width="280" height="66" rx="33" fill="#000" fill-opacity="0.45" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
+  <rect x="10" y="8" width="280" height="66" rx="33" fill="url(#glassFill)"/>
+  <g clip-path="url(#glassClip)"><rect class="sheen" x="10" y="8" width="280" height="66" fill="url(#glassSheen)"/></g>
+  <rect x="88.0" y="31" width="20" height="20" rx="5" fill="#1DB954"/><text x="98.0" y="46" text-anchor="middle" style="font: 700 13px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #121212">in</text>
+  <text class="label" x="120" y="48">LinkedIn</text>
+  <rect x="10.5" y="8.5" width="279" height="65" rx="33" fill="none" stroke="url(#glassEdge)"/>
+  <rect x="43" y="8.5" width="214" height="1" fill="url(#glassSpec)"/>
+</svg>
