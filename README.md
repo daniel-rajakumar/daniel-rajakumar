@@ -46,10 +46,7 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 
 ## Through my lens
 
-<a href="https://photography-website-ebon.vercel.app"><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/photos-dark.svg">
-  <img alt="My four newest photos, updated daily from my photography site" src="assets/photos-light.svg" width="100%">
-</picture></a>
+<p align="center"><a href="https://photography-website-ebon.vercel.app"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/photos-dark.svg"><img alt="My four newest photos, updated daily from my photography site" src="assets/photos-light.svg" width="100%"></picture></a></p>
 
 ## Outside of code
 
