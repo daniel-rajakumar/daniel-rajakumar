@@ -1,25 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Daniel Rajakumar, software engineer">
   <title>Daniel Rajakumar</title>
   <defs>
-    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#F7F7F8"/><stop offset="1" stop-color="#FFFFFF"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#E4E4E7"/><stop offset="0.5" stop-color="#E4E4E7" stop-opacity="0.35"/>
-    </linearGradient>
     <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#16A34A"/><stop offset="1" stop-color="#15803D"/>
     </linearGradient>
     <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="#16A34A" stop-opacity="0.16"/><stop offset="1" stop-color="#16A34A" stop-opacity="0"/>
     </radialGradient>
+    <!-- Fades the grid out toward the text without painting a background color. -->
     <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0" stop-color="#000"/><stop offset="0.45" stop-color="#FFF"/>
     </linearGradient>
-    <linearGradient id="fadeT" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.4" stop-color="#FFFFFF" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="inner"><rect x="16" y="16" width="1168" height="368" rx="20"/></clipPath>
+    <mask id="fade"><rect x="6" y="6" width="1188" height="388" fill="url(#fadeL)"/></mask>
+    <clipPath id="inner"><rect x="6" y="6" width="1188" height="388" rx="20"/></clipPath>
     <style>
       .grid line { stroke: #16A34A; stroke-opacity: 0.25; stroke-width: 1; }
       .floor { animation: roll 1.8s linear infinite; }
@@ -33,9 +26,9 @@
       .role { font: 400 26px 'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #3F3F46; }
       .prompt { font: 600 26px 'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #16A34A; }
       .cursor { fill: #16A34A; }
-      .pill { fill: #F0FDF4; stroke: #16A34A; stroke-opacity: .45; }
+      .pill { fill: #16A34A; fill-opacity: .08; stroke: #16A34A; stroke-opacity: .45; }
       .pilltext { font: 500 15px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #16A34A; }
-      .status { fill: #F0FDF4; stroke: #E4E4E7; }
+      .status { fill: #000000; fill-opacity: 0.032; stroke: #000000; stroke-opacity: 0.1; }
       .statustext { font: 500 15px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #3F3F46; }
       .dot { fill: #16A34A; }
       .ping { fill: #16A34A; transform-origin: 86px 318px; animation: ping 1.8s ease-out infinite; }
@@ -44,13 +37,11 @@
     </style>
   </defs>
 
-  <rect x="16" y="16" width="1168" height="368" rx="20" fill="url(#card)"/>
-  <g clip-path="url(#inner)">
+  <rect x="6.5" y="6.5" width="1187" height="387" rx="20" fill="#000000" fill-opacity="0.02" stroke="#000000" stroke-opacity="0.1"/>
+  <g clip-path="url(#inner)" mask="url(#fade)">
     <circle class="glow" cx="900" cy="260" r="230" fill="url(#sun)"/>
     <g class="grid"><g class="floor"><line x1="560" y1="261.4" x2="1180" y2="261.4"/><line x1="560" y1="265.6" x2="1180" y2="265.6"/><line x1="560" y1="272.6" x2="1180" y2="272.6"/><line x1="560" y1="282.4" x2="1180" y2="282.4"/><line x1="560" y1="295.0" x2="1180" y2="295.0"/><line x1="560" y1="310.4" x2="1180" y2="310.4"/><line x1="560" y1="328.6" x2="1180" y2="328.6"/><line x1="560" y1="349.6" x2="1180" y2="349.6"/><line x1="560" y1="373.4" x2="1180" y2="373.4"/><line x1="560" y1="400.0" x2="1180" y2="400.0"/><line x1="560" y1="429.4" x2="1180" y2="429.4"/><line x1="900" y1="260" x2="90" y2="440"/><line x1="900" y1="260" x2="180" y2="440"/><line x1="900" y1="260" x2="270" y2="440"/><line x1="900" y1="260" x2="360" y2="440"/><line x1="900" y1="260" x2="450" y2="440"/><line x1="900" y1="260" x2="540" y2="440"/><line x1="900" y1="260" x2="630" y2="440"/><line x1="900" y1="260" x2="720" y2="440"/><line x1="900" y1="260" x2="810" y2="440"/><line x1="900" y1="260" x2="900" y2="440"/><line x1="900" y1="260" x2="990" y2="440"/><line x1="900" y1="260" x2="1080" y2="440"/><line x1="900" y1="260" x2="1170" y2="440"/><line x1="900" y1="260" x2="1260" y2="440"/><line x1="900" y1="260" x2="1350" y2="440"/><line x1="900" y1="260" x2="1440" y2="440"/><line x1="900" y1="260" x2="1530" y2="440"/><line x1="900" y1="260" x2="1620" y2="440"/><line x1="900" y1="260" x2="1710" y2="440"/></g></g>
-    <rect x="16" y="16" width="1168" height="368" fill="url(#fadeL)"/>
   </g>
-  <rect x="16.5" y="16.5" width="1167" height="367" rx="20" fill="none" stroke="url(#edge)"/>
 
   <text class="hello" x="64" y="92">HI, I'M</text>
   <text class="name" x="62" y="160">Daniel Rajakumar</text>

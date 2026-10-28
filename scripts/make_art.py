@@ -182,25 +182,18 @@ def hero(t: dict, status: str) -> str:
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Daniel Rajakumar, software engineer">
   <title>Daniel Rajakumar</title>
   <defs>
-    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="{t['card_hi']}"/><stop offset="1" stop-color="{t['card']}"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="{t['border']}"/><stop offset="0.5" stop-color="{t['border']}" stop-opacity="0.35"/>
-    </linearGradient>
     <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="{t['green']}"/><stop offset="1" stop-color="{t['green2']}"/>
     </linearGradient>
     <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="{t['green']}" stop-opacity="{t['glow']}"/><stop offset="1" stop-color="{t['green']}" stop-opacity="0"/>
     </radialGradient>
+    <!-- Fades the grid out toward the text without painting a background color. -->
     <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="{t['card']}"/><stop offset="0.45" stop-color="{t['card']}" stop-opacity="0"/>
+      <stop offset="0" stop-color="#000"/><stop offset="0.45" stop-color="#FFF"/>
     </linearGradient>
-    <linearGradient id="fadeT" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="{t['card']}"/><stop offset="0.4" stop-color="{t['card']}" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="inner"><rect x="16" y="16" width="1168" height="368" rx="20"/></clipPath>
+    <mask id="fade"><rect x="6" y="6" width="1188" height="388" fill="url(#fadeL)"/></mask>
+    <clipPath id="inner"><rect x="6" y="6" width="1188" height="388" rx="20"/></clipPath>
     <style>
       .grid line {{ stroke: {t['green']}; stroke-opacity: {t['grid_op']}; stroke-width: 1; }}
       .floor {{ animation: roll 1.8s linear infinite; }}
@@ -214,9 +207,9 @@ def hero(t: dict, status: str) -> str:
       .role {{ font: 400 {ROLE_SIZE}px {MONO}; fill: {t['muted']}; }}
       .prompt {{ font: 600 {ROLE_SIZE}px {MONO}; fill: {t['green']}; }}
       .cursor {{ fill: {t['green']}; }}
-      .pill {{ fill: {t['pill']}; stroke: {t['green']}; stroke-opacity: .45; }}
+      .pill {{ fill: {t['green']}; fill-opacity: .08; stroke: {t['green']}; stroke-opacity: .45; }}
       .pilltext {{ font: 500 15px {SANS}; fill: {t['green']}; }}
-      .status {{ fill: {t['pill']}; stroke: {t['border']}; }}
+      .status {{ fill: {t['ink']}; fill-opacity: {t['wash'] * 1.6:g}; stroke: {t['ink']}; stroke-opacity: {t['line']}; }}
       .statustext {{ font: 500 15px {SANS}; fill: {t['muted']}; }}
       .dot {{ fill: {t['green']}; }}
       .ping {{ fill: {t['green']}; transform-origin: 86px 318px; animation: ping 1.8s ease-out infinite; }}
@@ -225,13 +218,11 @@ def hero(t: dict, status: str) -> str:
     </style>
   </defs>
 
-  <rect x="16" y="16" width="1168" height="368" rx="20" fill="url(#card)"/>
-  <g clip-path="url(#inner)">
+  <rect x="6.5" y="6.5" width="1187" height="387" rx="20" fill="{t['ink']}" fill-opacity="{t['wash']}" stroke="{t['ink']}" stroke-opacity="{t['line']}"/>
+  <g clip-path="url(#inner)" mask="url(#fade)">
     <circle class="glow" cx="900" cy="260" r="230" fill="url(#sun)"/>
     <g class="grid"><g class="floor">{''.join(grid_lines)}</g></g>
-    <rect x="16" y="16" width="1168" height="368" fill="url(#fadeL)"/>
   </g>
-  <rect x="16.5" y="16.5" width="1167" height="367" rx="20" fill="none" stroke="url(#edge)"/>
 
   <text class="hello" x="64" y="92">HI, I'M</text>
   <text class="name" x="62" y="160">Daniel Rajakumar</text>
