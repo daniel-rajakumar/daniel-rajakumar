@@ -4,13 +4,10 @@ The look follows danielrajakumar.com: charcoal cards, one green accent,
 Poppins type, and the short green bar under headings.
 
 Run from the repo root: python3 scripts/make_art.py
-Writes, for each theme: assets/hero-*.svg (with the current New Jersey time
-in its status pill), card-<project>-*.svg, link-<name>-*.svg, about-*.svg,
-tools-*.svg, and outside-*.svg. Every piece is the same glass panel, so the
-whole README reads as one design.
+Writes assets/hero-{dark,light}.svg (with the current New Jersey time in its
+status pill) and assets/card-<project>-{dark,light}.svg.
 """
 
-import base64
 import html
 import textwrap
 from datetime import datetime
@@ -204,7 +201,7 @@ def glass(t: dict, x: float, y: float, w: float, h: float, rx: float, delay: flo
       <feGaussianBlur stdDeviation="10"/>
     </filter>
     <mask id="glassOutside">
-      <rect x="-5000" y="-5000" width="10000" height="10000" fill="#FFF"/>
+      <rect width="100%" height="100%" fill="#FFF"/>
       <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#000"/>
     </mask>
     <clipPath id="glassClip"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}"/></clipPath>"""
@@ -364,123 +361,6 @@ def card(p: dict, t: dict) -> str:
 """
 
 
-LINKS = [
-    {"slug": "website", "label": "danielrajakumar.com", "icon": "globe"},
-    {"slug": "rockygpt", "label": "RockyGPT", "icon": "live"},
-    {"slug": "linkedin", "label": "LinkedIn", "icon": "in"},
-    {"slug": "email", "label": "Email", "icon": "mail"},
-]
-
-ABOUT = {
-    "intro": "I build full-stack web apps in TypeScript and Next.js, lately with a focus on retrieval systems and the tests that keep them honest.",
-    "points": [
-        ("🎓", "B.S. in Computer Science, Ramapo College of New Jersey (2026)"),
-        ("💼", "Software engineering intern at dsm-firmenich, where I built and launched an internal assessment platform as the sole developer"),
-        ("🤖", "Building RockyGPT, a campus assistant for Ramapo that answers with linked sources"),
-    ],
-}
-
-OUTSIDE = [
-    ("🚀", "Led Ramapo's Google Developer Student Club and organized the college's first DevFest"),
-    ("🧑‍💻", "Founded Ramapo's Computer Science Club"),
-]
-
-# Wide panels share the banner's 1200-unit width, so their text is sized to match the cards on screen.
-WIDE = 1200
-WIDE_TEXT = 21
-WIDE_WRAP = 100
-
-
-def icon(kind: str, t: dict, cx: float, cy: float) -> str:
-    g = t["green"]
-    if kind == "globe":
-        return (f'<circle cx="{cx}" cy="{cy}" r="9" fill="none" stroke="{g}" stroke-width="2"/>'
-                f'<ellipse cx="{cx}" cy="{cy}" rx="4" ry="9" fill="none" stroke="{g}" stroke-width="1.6"/>'
-                f'<line x1="{cx - 9}" y1="{cy}" x2="{cx + 9}" y2="{cy}" stroke="{g}" stroke-width="1.6"/>')
-    if kind == "live":
-        return (f'<circle class="ping" cx="{cx}" cy="{cy}" r="6" style="transform-origin:{cx}px {cy}px"/>'
-                f'<circle class="dot" cx="{cx}" cy="{cy}" r="6"/>')
-    if kind == "in":
-        return (f'<rect x="{cx - 10}" y="{cy - 10}" width="20" height="20" rx="5" fill="{g}"/>'
-                f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" style="font: 700 13px {SANS}; fill: {t["text"] if t["ink"] == "#000000" else "#121212"}">in</text>')
-    return (f'<rect x="{cx - 10}" y="{cy - 7}" width="20" height="14" rx="3" fill="none" stroke="{g}" stroke-width="2"/>'
-            f'<path d="M{cx - 9} {cy - 6} L{cx} {cy + 1} L{cx + 9} {cy - 6}" fill="none" stroke="{g}" stroke-width="2"/>')
-
-
-def link_pill(link: dict, t: dict, index: int) -> str:
-    """One glass link button for the row under the banner."""
-    w, h = 300, 92
-    g_defs, g_style, g_under, g_over = glass(t, 10, 8, w - 20, h - 26, 33, delay=index * 0.8)
-    label = html.escape(link["label"])
-    text_w = len(link["label"]) * 11.5
-    start = (w - (text_w + 32)) / 2
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{label}">
-  <title>{label}</title>
-  <defs>{g_defs}
-    <style>{g_style}
-      .label {{ font: 600 21px {SANS}; fill: {t['text']}; }}
-      .dot {{ fill: {t['green']}; }}
-      .ping {{ fill: {t['green']}; animation: ping 1.8s ease-out infinite; }}
-      @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.6); opacity: 0 }} }}
-      @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
-    </style>
-  </defs>{g_under}
-  {icon(link['icon'], t, start + 10, 41)}
-  <text class="label" x="{start + 32:g}" y="48">{label}</text>{g_over}
-</svg>
-"""
-
-
-def text_panel(t: dict, title: str, intro: str | None, points: list[tuple[str, str]], delay: float) -> str:
-    """A wide glass panel of text: an optional intro line, then emoji-led points."""
-    # Each block is the intro or one point; lines in a block sit closer than blocks do.
-    blocks = []
-    if intro:
-        blocks.append(("intro", "", textwrap.wrap(intro, WIDE_WRAP)))
-    for emoji, text in points:
-        blocks.append(("point", emoji, textwrap.wrap(text, WIDE_WRAP - 6)))
-    y, rows = 62, []
-    for kind, emoji, wrapped in blocks:
-        if emoji:
-            rows.append(f'<text class="emoji" x="54" y="{y}">{emoji}</text>')
-        x = 54 if kind == "intro" else 92
-        for line in wrapped:
-            rows.append(f'<text class="{kind}" x="{x}" y="{y}">{html.escape(line)}</text>')
-            y += 30
-        y += 14 if kind == "intro" else 8
-    h = y + 14
-    g_defs, g_style, g_under, g_over = glass(t, 16, 8, WIDE - 32, h - 24, 24, delay=delay)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDE} {h}" width="{WIDE}" height="{h}" role="img" aria-label="{html.escape(title)}">
-  <title>{html.escape(title)}</title>
-  <defs>{g_defs}
-    <style>{g_style}
-      .intro {{ font: 500 {WIDE_TEXT + 1}px {SANS}; fill: {t['text']}; }}
-      .point {{ font: 400 {WIDE_TEXT}px {SANS}; fill: {t['muted']}; }}
-      .emoji {{ font: 400 {WIDE_TEXT}px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif; }}
-    </style>
-  </defs>{g_under}
-  {''.join(rows)}{g_over}
-</svg>
-"""
-
-
-def tools_panel(t: dict) -> str:
-    """The skill icons (scripts/skillicons.svg, from skillicons.dev) on a wide glass panel."""
-    icons = (Path(__file__).resolve().parent / "skillicons.svg").read_bytes()
-    data = base64.b64encode(icons).decode()
-    h, icon_w = 120, 860
-    icon_h = icon_w * 256 / 3556
-    g_defs, g_style, g_under, g_over = glass(t, 16, 8, WIDE - 32, h - 24, 24, delay=2)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDE} {h}" width="{WIDE}" height="{h}" role="img" aria-label="TypeScript, JavaScript, Python, C++, Java, Next.js, React, FastAPI, PostgreSQL, Redis, Docker, AWS">
-  <title>Tools I use</title>
-  <defs>{g_defs}
-    <style>{g_style}</style>
-  </defs>{g_under}
-  <image x="{(WIDE - icon_w) / 2:g}" y="{8 + (h - 24 - icon_h) / 2:g}" width="{icon_w}" height="{icon_h:g}" href="data:image/svg+xml;base64,{data}"/>{g_over}
-</svg>
-"""
-
-
 def main() -> None:
     root = Path(__file__).resolve().parent.parent / "assets"
     root.mkdir(exist_ok=True)
@@ -489,11 +369,6 @@ def main() -> None:
         (root / f"hero-{name}.svg").write_text(hero(theme, status))
         for p in PROJECTS:
             (root / f"card-{p['slug']}-{name}.svg").write_text(card(p, theme))
-        for i, link in enumerate(LINKS):
-            (root / f"link-{link['slug']}-{name}.svg").write_text(link_pill(link, theme, i))
-        (root / f"about-{name}.svg").write_text(text_panel(theme, "About me", ABOUT["intro"], ABOUT["points"], 1))
-        (root / f"tools-{name}.svg").write_text(tools_panel(theme))
-        (root / f"outside-{name}.svg").write_text(text_panel(theme, "Outside of code", None, OUTSIDE, 3))
 
 
 if __name__ == "__main__":
