@@ -43,6 +43,9 @@ THEMES = {
         "green2": "#279B59",
         "pill": "#1E1E1F",
         "glow": 0.30,
+        "ink": "#FFFFFF",
+        "wash": 0.035,
+        "line": 0.12,
         "grid_op": 0.22,
     },
     "light": {
@@ -58,6 +61,9 @@ THEMES = {
         "green2": "#15803D",
         "pill": "#F0FDF4",
         "glow": 0.16,
+        "ink": "#000000",
+        "wash": 0.02,
+        "line": 0.10,
         "grid_op": 0.25,
     },
 }
@@ -249,7 +255,11 @@ def hero(t: dict, status: str) -> str:
 
 
 def card(p: dict, t: dict) -> str:
-    """A project card shaped like the cards on danielrajakumar.com."""
+    """A project card shaped like the cards on danielrajakumar.com.
+
+    The card itself is a faint see-through wash, so it sits on GitHub's dark,
+    dimmed, or light page without looking like a separate block.
+    """
     about = textwrap.wrap(p["about"], 52)[:3]
     about_lines = "".join(
         f'<text class="about" x="28" y="{112 + i * 21}">{html.escape(line)}</text>' for i, line in enumerate(about)
@@ -271,12 +281,6 @@ def card(p: dict, t: dict) -> str:
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 236" width="420" height="236" role="img" aria-label="{html.escape(p['name'])}: {html.escape(p['tagline'])}">
   <title>{html.escape(p['name'])}</title>
   <defs>
-    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="{t['card_hi']}"/><stop offset="1" stop-color="{t['card']}"/>
-    </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="{t['border']}"/><stop offset="0.5" stop-color="{t['border']}" stop-opacity="0.35"/>
-    </linearGradient>
     <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="{t['green']}"/><stop offset="1" stop-color="{t['green2']}"/>
     </linearGradient>
@@ -284,7 +288,7 @@ def card(p: dict, t: dict) -> str:
       .name {{ font: 600 22px {SANS}; fill: {t['text']}; }}
       .tagline {{ font: 500 13px {SANS}; fill: {t['green']}; }}
       .about {{ font: 400 14px {SANS}; fill: {t['muted']}; }}
-      .tag {{ fill: {t['pill']}; stroke: {t['border']}; }}
+      .tag {{ fill: {t['ink']}; fill-opacity: {t['wash'] * 1.6:g}; stroke: {t['ink']}; stroke-opacity: {t['line']}; }}
       .tagtext {{ font: 500 12px {SANS}; fill: {t['muted']}; }}
       .livetext {{ font: 500 12px {SANS}; fill: {t['green']}; }}
       .dot {{ fill: {t['green']}; }}
@@ -295,8 +299,7 @@ def card(p: dict, t: dict) -> str:
       @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
     </style>
   </defs>
-  <rect x="4" y="4" width="412" height="228" rx="18" fill="url(#card)"/>
-  <rect x="4.5" y="4.5" width="411" height="227" rx="18" fill="none" stroke="url(#edge)"/>
+  <rect x="4.5" y="4.5" width="411" height="227" rx="18" fill="{t['ink']}" fill-opacity="{t['wash']}" stroke="{t['ink']}" stroke-opacity="{t['line']}"/>
   <text class="name" x="28" y="46">{html.escape(p['name'])}</text>
   {live}
   <text class="tagline" x="28" y="70">{html.escape(p['tagline'])}</text>
