@@ -18,14 +18,18 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 
 ## What I've built
 
-| Project | What it is | Built with |
-| --- | --- | --- |
-| **[RockyGPT](https://rockygpt.danielrajakumar.com)** | Campus AI assistant for dining, events, transit, housing, and more. Every answer cites its sources, backed by an eval harness of 2,200+ scored queries. | Next.js, TypeScript, PostgreSQL, pgvector |
-| **[Bubble PoppAR](https://github.com/daniel-rajakumar/Bubble-PoppAR)** | Two-player webcam game you play with hand and eye gestures. Runner-up at HackRamapo 2026 (MLH). | TypeScript, MediaPipe, Three.js, Socket.IO |
-| **[Canoga Game](https://github.com/daniel-rajakumar/CanogaGame)** · [play](https://projects.canogagame.danielrajakumar.com) | Dice-and-strategy board game with web, command-line, and Android versions, plus a computer opponent. | JavaScript, C++, Java |
-| **[VC370](https://github.com/daniel-rajakumar/VC370)** | Two-pass assembler and emulator for a 13-opcode simulated computer. | C++17 |
-| **[Image Splitter](https://github.com/daniel-rajakumar/imageSplitter)** · [try it](https://image-splitter-eight.vercel.app) | Cuts one image into a grid of tiles for Instagram carousels and profile grids. | JavaScript |
-| **[Photography](https://github.com/daniel-rajakumar/photography-website)** · [view](https://photography-website-ebon.vercel.app) | My photo gallery, with swipe filters and camera details for each shot. | Next.js, TypeScript |
+<p align="center">
+<a href="https://rockygpt.danielrajakumar.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-rockygpt-dark.svg"><img alt="RockyGPT, a campus AI assistant" src="assets/card-rockygpt-light.svg" width="49%"></picture></a>
+<a href="https://github.com/daniel-rajakumar/Bubble-PoppAR"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-bubble-poppar-dark.svg"><img alt="Bubble PoppAR, runner-up at HackRamapo 2026" src="assets/card-bubble-poppar-light.svg" width="49%"></picture></a>
+<br>
+<a href="https://github.com/daniel-rajakumar/CanogaGame"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-canoga-dark.svg"><img alt="Canoga Game, a dice-and-strategy board game" src="assets/card-canoga-light.svg" width="49%"></picture></a>
+<a href="https://github.com/daniel-rajakumar/VC370"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-vc370-dark.svg"><img alt="VC370, an assembler and emulator" src="assets/card-vc370-light.svg" width="49%"></picture></a>
+<br>
+<a href="https://github.com/daniel-rajakumar/imageSplitter"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-image-splitter-dark.svg"><img alt="Image Splitter, a grid maker for Instagram" src="assets/card-image-splitter-light.svg" width="49%"></picture></a>
+<a href="https://github.com/daniel-rajakumar/photography-website"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-photography-dark.svg"><img alt="Photography, my photo gallery" src="assets/card-photography-light.svg" width="49%"></picture></a>
+</p>
+
+<p align="center"><sub>Try them live: <a href="https://rockygpt.danielrajakumar.com">RockyGPT</a> · <a href="https://projects.canogagame.danielrajakumar.com">Canoga Game</a> · <a href="https://image-splitter-eight.vercel.app">Image Splitter</a> · <a href="https://photography-website-ebon.vercel.app">Photography</a></sub></p>
 
 ## Tools I use
 
@@ -39,6 +43,13 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
   <source media="(prefers-color-scheme: dark)" srcset="generated/snake-dark.svg">
   <img alt="A snake eating my GitHub contribution graph, updated daily" src="generated/snake-light.svg" width="100%">
 </picture>
+
+## Through my lens
+
+<a href="https://photography-website-ebon.vercel.app"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/photos-dark.svg">
+  <img alt="My four newest photos, updated daily from my photography site" src="assets/photos-light.svg" width="100%">
+</picture></a>
 
 ## Outside of code
 

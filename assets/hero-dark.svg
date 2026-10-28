@@ -35,6 +35,8 @@
       .cursor { fill: #1DB954; }
       .pill { fill: #1E1E1F; stroke: #1DB954; stroke-opacity: .45; }
       .pilltext { font: 500 15px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #1DB954; }
+      .status { fill: #1E1E1F; stroke: #383838; }
+      .statustext { font: 500 15px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #D6D6D6; }
       .dot { fill: #1DB954; }
       .ping { fill: #1DB954; transform-origin: 86px 318px; animation: ping 1.8s ease-out infinite; }
       @keyframes ping { from { transform: scale(1); opacity: .6 } to { transform: scale(2.8); opacity: 0 } }
@@ -108,4 +110,7 @@
   <circle class="ping" cx="86" cy="318" r="5"/>
   <circle class="dot" cx="86" cy="318" r="5"/>
   <text class="pilltext" x="102" y="323">Open to New Grad SWE Roles</text>
+
+  <rect class="status" x="376" y="298" width="239" height="40" rx="20"/>
+  <text class="statustext" x="394" y="323">☀️ 11 AM in NJ · shipping</text>
 </svg>

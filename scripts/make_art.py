@@ -4,10 +4,15 @@ The look follows danielrajakumar.com: charcoal cards, one green accent,
 Poppins type, and the short green bar under headings.
 
 Run from the repo root: python3 scripts/make_art.py
-Writes assets/hero-{dark,light}.svg.
+Writes assets/hero-{dark,light}.svg (with the current New Jersey time in its
+status pill) and assets/card-<project>-{dark,light}.svg.
 """
 
+import html
+import textwrap
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROLES = [
     "Software Engineer",
@@ -58,6 +63,76 @@ THEMES = {
 }
 
 
+# What the banner says at each hour in New Jersey: (first hour, emoji, doing).
+STATUSES = [
+    (0, "🌙", "probably debugging"),
+    (3, "😴", "asleep, hopefully"),
+    (7, "☕", "morning coffee"),
+    (9, "☀️", "shipping"),
+    (12, "🥪", "lunch break"),
+    (13, "⚡", "building RockyGPT"),
+    (18, "🌆", "side projects"),
+    (22, "🌙", "late-night commits"),
+]
+
+PROJECTS = [
+    {
+        "slug": "rockygpt",
+        "name": "RockyGPT",
+        "tagline": "Campus AI assistant",
+        "about": "Answers Ramapo questions on dining, events, transit, and housing, and cites a source for every answer. Tuned against 2,200+ scored queries.",
+        "tags": ["Next.js", "TypeScript", "PostgreSQL", "pgvector"],
+        "live": True,
+    },
+    {
+        "slug": "bubble-poppar",
+        "name": "Bubble PoppAR",
+        "tagline": "Runner-up · HackRamapo 2026",
+        "about": "Two-player webcam game you play with hand and eye gestures, with real-time matches and server-checked scoring.",
+        "tags": ["TypeScript", "MediaPipe", "Three.js", "Socket.IO"],
+        "live": False,
+    },
+    {
+        "slug": "canoga",
+        "name": "Canoga Game",
+        "tagline": "Dice-and-strategy board game",
+        "about": "Web, command-line, and Android versions of the same game, each with a computer opponent.",
+        "tags": ["JavaScript", "C++", "Java"],
+        "live": True,
+    },
+    {
+        "slug": "vc370",
+        "name": "VC370",
+        "tagline": "Assembler and emulator",
+        "about": "Two-pass assembler and emulator for a 13-opcode simulated computer, with assemble-time and runtime error checks.",
+        "tags": ["C++17", "Make"],
+        "live": False,
+    },
+    {
+        "slug": "image-splitter",
+        "name": "Image Splitter",
+        "tagline": "Grid maker for Instagram",
+        "about": "Cuts one image into a grid of tiles for carousels, profile grids, and posters, with pinch-to-zoom on phones.",
+        "tags": ["JavaScript"],
+        "live": True,
+    },
+    {
+        "slug": "photography",
+        "name": "Photography",
+        "tagline": "My photo gallery",
+        "about": "Swipe through my photos with filters and the camera details for each shot. Installs like an app.",
+        "tags": ["Next.js", "TypeScript"],
+        "live": True,
+    },
+]
+
+
+def nj_status(now: datetime) -> str:
+    """The banner's status line for a moment in New Jersey, e.g. '☀️ 10 AM in NJ · shipping'."""
+    emoji, doing = next((e, d) for h, e, d in reversed(STATUSES) if now.hour >= h)
+    return f"{emoji} {now.strftime('%-I %p')} in NJ · {doing}"
+
+
 def role_groups() -> str:
     """One <g> per role: it types in, holds, deletes, and hides until its turn comes back."""
     slot = CYCLE / len(ROLES)
@@ -88,7 +163,8 @@ def role_groups() -> str:
     return "".join(out)
 
 
-def hero(t: dict) -> str:
+def hero(t: dict, status: str) -> str:
+    status_w = round(len(status) * 8.2 + 34)
     # A receding floor grid on the right half, fading toward the text.
     grid_lines = []
     for k in range(1, 12):
@@ -134,6 +210,8 @@ def hero(t: dict) -> str:
       .cursor {{ fill: {t['green']}; }}
       .pill {{ fill: {t['pill']}; stroke: {t['green']}; stroke-opacity: .45; }}
       .pilltext {{ font: 500 15px {SANS}; fill: {t['green']}; }}
+      .status {{ fill: {t['pill']}; stroke: {t['border']}; }}
+      .statustext {{ font: 500 15px {SANS}; fill: {t['muted']}; }}
       .dot {{ fill: {t['green']}; }}
       .ping {{ fill: {t['green']}; transform-origin: 86px 318px; animation: ping 1.8s ease-out infinite; }}
       @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.8); opacity: 0 }} }}
@@ -163,6 +241,68 @@ def hero(t: dict) -> str:
   <circle class="ping" cx="86" cy="318" r="5"/>
   <circle class="dot" cx="86" cy="318" r="5"/>
   <text class="pilltext" x="102" y="323">Open to New Grad SWE Roles</text>
+
+  <rect class="status" x="376" y="298" width="{status_w}" height="40" rx="20"/>
+  <text class="statustext" x="394" y="323">{html.escape(status)}</text>
+</svg>
+"""
+
+
+def card(p: dict, t: dict) -> str:
+    """A project card shaped like the cards on danielrajakumar.com."""
+    about = textwrap.wrap(p["about"], 52)[:3]
+    about_lines = "".join(
+        f'<text class="about" x="28" y="{112 + i * 21}">{html.escape(line)}</text>' for i, line in enumerate(about)
+    )
+    tags, x = [], 28
+    for tag in p["tags"]:
+        w = round(len(tag) * 7.1 + 22)
+        tags.append(
+            f'<rect class="tag" x="{x}" y="186" width="{w}" height="26" rx="13"/>'
+            f'<text class="tagtext" x="{x + w / 2:g}" y="203.5" text-anchor="middle">{html.escape(tag)}</text>'
+        )
+        x += w + 8
+    live = (
+        '<circle class="ping" cx="378" cy="38" r="4.5"/><circle class="dot" cx="378" cy="38" r="4.5"/>'
+        '<text class="livetext" x="364" y="43" text-anchor="end">Live</text>'
+        if p["live"]
+        else ""
+    )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 236" width="420" height="236" role="img" aria-label="{html.escape(p['name'])}: {html.escape(p['tagline'])}">
+  <title>{html.escape(p['name'])}</title>
+  <defs>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="{t['card_hi']}"/><stop offset="1" stop-color="{t['card']}"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="{t['border']}"/><stop offset="0.5" stop-color="{t['border']}" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="{t['green']}"/><stop offset="1" stop-color="{t['green2']}"/>
+    </linearGradient>
+    <style>
+      .name {{ font: 600 22px {SANS}; fill: {t['text']}; }}
+      .tagline {{ font: 500 13px {SANS}; fill: {t['green']}; }}
+      .about {{ font: 400 14px {SANS}; fill: {t['muted']}; }}
+      .tag {{ fill: {t['pill']}; stroke: {t['border']}; }}
+      .tagtext {{ font: 500 12px {SANS}; fill: {t['muted']}; }}
+      .livetext {{ font: 500 12px {SANS}; fill: {t['green']}; }}
+      .dot {{ fill: {t['green']}; }}
+      .ping {{ fill: {t['green']}; transform-origin: 378px 38px; animation: ping 1.8s ease-out infinite; }}
+      @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.8); opacity: 0 }} }}
+      .bar {{ fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 28px 0; }}
+      @keyframes grow {{ from {{ transform: scaleX(.55) }} to {{ transform: scaleX(1) }} }}
+      @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
+    </style>
+  </defs>
+  <rect x="4" y="4" width="412" height="228" rx="18" fill="url(#card)"/>
+  <rect x="4.5" y="4.5" width="411" height="227" rx="18" fill="none" stroke="url(#edge)"/>
+  <text class="name" x="28" y="46">{html.escape(p['name'])}</text>
+  {live}
+  <text class="tagline" x="28" y="70">{html.escape(p['tagline'])}</text>
+  <rect class="bar" x="28" y="82" width="36" height="4" rx="2"/>
+  {about_lines}
+  {''.join(tags)}
 </svg>
 """
 
@@ -170,8 +310,11 @@ def hero(t: dict) -> str:
 def main() -> None:
     root = Path(__file__).resolve().parent.parent / "assets"
     root.mkdir(exist_ok=True)
+    status = nj_status(datetime.now(ZoneInfo("America/New_York")))
     for name, theme in THEMES.items():
-        (root / f"hero-{name}.svg").write_text(hero(theme))
+        (root / f"hero-{name}.svg").write_text(hero(theme, status))
+        for p in PROJECTS:
+            (root / f"card-{p['slug']}-{name}.svg").write_text(card(p, theme))
 
 
 if __name__ == "__main__":
