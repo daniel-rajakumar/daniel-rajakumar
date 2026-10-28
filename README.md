@@ -16,11 +16,6 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 - 💼 Software engineering intern at **dsm-firmenich**, where I built and launched an internal assessment platform as the sole developer
 - 🤖 Building **[RockyGPT](https://rockygpt.danielrajakumar.com)**, a campus assistant for Ramapo that answers with linked sources
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
-  <img alt="" src="assets/divider-light.svg" width="100%">
-</picture>
-
 ## ⚡ What I've built
 
 | Project | What it is | Built with |
@@ -38,11 +33,6 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
   <img alt="TypeScript, JavaScript, Python, C++, Java, Next.js, React, FastAPI, PostgreSQL, Redis, Docker, AWS" src="https://skillicons.dev/icons?i=ts,js,py,cpp,java,nextjs,react,fastapi,postgres,redis,docker,aws&perline=12">
 </p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
-  <img alt="" src="assets/divider-light.svg" width="100%">
-</picture>
-
 ## 📈 My year in code
 
 <picture>
@@ -50,15 +40,7 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
   <img alt="My GitHub contributions as a 3D city, updated daily" src="profile-3d-contrib/profile-green-animate.svg" width="100%">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="generated/snake-dark.svg">
-  <img alt="A snake eating my GitHub contribution graph, updated daily" src="generated/snake-light.svg" width="100%">
-</picture>
-
 ## 🌙 Outside of code
 
 - Led Ramapo's Google Developer Student Club and organized the college's first DevFest
 - Founded Ramapo's Computer Science Club
-- Still a big fan of the OneDark color scheme. Comic Sans, less so these days.
-
-<sub>The banner and dividers are hand-made animated SVGs (`scripts/make_art.py`). The 3D city and snake are regenerated every day by a GitHub Action.</sub>

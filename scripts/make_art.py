@@ -1,7 +1,7 @@
 """Generate the animated SVGs used in the profile README.
 
 Run from the repo root: python3 scripts/make_art.py
-Writes assets/hero-{dark,light}.svg and assets/divider-{dark,light}.svg.
+Writes assets/hero-{dark,light}.svg.
 """
 
 from pathlib import Path
@@ -89,7 +89,7 @@ def hero(t: dict) -> str:
         x2 = 600 + k * 130
         grid_lines.append(f'<line x1="600" y1="300" x2="{x2}" y2="560"/>')
     stars = []
-    for k in range(38):
+    for k in range(16):
         x = (k * 317) % 1200
         y = (k * 89) % 230 + 10
         r = 0.8 + (k % 3) * 0.5
@@ -134,13 +134,6 @@ def hero(t: dict) -> str:
       .dot {{ fill: {t['ok']}; }}
       .ping {{ fill: {t['ok']}; transform-origin: 46px 330px; animation: ping 1.8s ease-out infinite; }}
       @keyframes ping {{ from {{ transform: scale(1); opacity: .7 }} to {{ transform: scale(3); opacity: 0 }} }}
-      .scan {{ fill: {t['a']}; opacity: .07; animation: scan 5s linear infinite; }}
-      @keyframes scan {{ from {{ transform: translateY(-60px) }} to {{ transform: translateY(420px) }} }}
-      .ring {{ fill: none; stroke: {t['a']}; stroke-opacity: .35; stroke-dasharray: 4 10; transform-origin: 1060px 150px; animation: spin 24s linear infinite; }}
-      .ring2 {{ fill: none; stroke: {t['c']}; stroke-opacity: .3; stroke-dasharray: 2 8; transform-origin: 1060px 150px; animation: spin 16s linear infinite reverse; }}
-      @keyframes spin {{ to {{ transform: rotate(360deg) }} }}
-      .orb {{ fill: {t['b']}; filter: url(#glow); animation: float 6s ease-in-out infinite; }}
-      @keyframes float {{ 0%,100% {{ transform: translateY(0) }} 50% {{ transform: translateY(-10px) }} }}
       @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
     </style>
   </defs>
@@ -150,10 +143,6 @@ def hero(t: dict) -> str:
     <circle cx="600" cy="300" r="260" fill="url(#sun)"/>
     <g class="grid"><g class="floor">{''.join(grid_lines)}</g></g>
     <rect y="290" width="1200" height="110" fill="url(#fade)"/>
-    <circle class="ring" cx="1060" cy="150" r="90"/>
-    <circle class="ring2" cx="1060" cy="150" r="64"/>
-    <circle class="orb" cx="1060" cy="150" r="22"/>
-    <rect class="scan" x="0" y="0" width="1200" height="40"/>
 
     <text class="hello" x="60" y="92">HI, I'M</text>
     <text class="name" x="56" y="170"{t['name_filter']}>DANIEL RAJAKUMAR</text>
@@ -173,36 +162,11 @@ def hero(t: dict) -> str:
 """
 
 
-def divider(t: dict) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 24" width="1200" height="24" role="img" aria-label="divider">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="{t['a']}" stop-opacity="0"/>
-      <stop offset="0.5" stop-color="{t['b']}"/>
-      <stop offset="1" stop-color="{t['c']}" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="glow"><feGaussianBlur stdDeviation="3"/></filter>
-    <style>
-      .beam {{ animation: sweep 4s ease-in-out infinite; }}
-      @keyframes sweep {{ 0% {{ transform: translateX(-1200px) }} 100% {{ transform: translateX(1200px) }} }}
-      @media (prefers-reduced-motion: reduce) {{ .beam {{ animation: none; }} }}
-    </style>
-  </defs>
-  <rect x="0" y="11" width="1200" height="2" fill="{t['grid']}" opacity="0.5"/>
-  <g class="beam">
-    <rect x="0" y="9" width="1200" height="6" fill="url(#g)" filter="url(#glow)"/>
-    <rect x="0" y="11" width="1200" height="2" fill="url(#g)"/>
-  </g>
-</svg>
-"""
-
-
 def main() -> None:
     root = Path(__file__).resolve().parent.parent / "assets"
     root.mkdir(exist_ok=True)
     for name, theme in THEMES.items():
         (root / f"hero-{name}.svg").write_text(hero(theme))
-        (root / f"divider-{name}.svg").write_text(divider(theme))
 
 
 if __name__ == "__main__":
