@@ -114,14 +114,6 @@ PROJECTS = [
         "tags": ["JavaScript", "C++", "Java"],
         "live": True,
     },
-    {
-        "slug": "image-splitter",
-        "name": "Image Splitter",
-        "tagline": "Grid maker for Instagram",
-        "about": "Cuts one image into a grid of tiles for carousels, profile grids, and posters, with pinch-to-zoom on phones.",
-        "tags": ["JavaScript"],
-        "live": True,
-    },
 ]
 
 
