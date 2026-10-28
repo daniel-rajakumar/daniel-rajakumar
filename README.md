@@ -4,8 +4,8 @@
 </picture>
 
 <p align="center">
-  <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-202022?style=for-the-badge&logo=googlechrome&logoColor=1DB954"></a>
-  <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-202022?style=for-the-badge&logo=linkedin&logoColor=1DB954"></a>
+  <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-202022?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPGNpcmNsZSBjeD0iMTIiIGN5PSI3LjUiIHI9IjQuNSIgZmlsbD0iIzFEQjk1NCIvPjxwYXRoIGZpbGw9IiMxREI5NTQiIGQ9Ik0zLjUgMjFjMC00LjYgMy44LTcuNSA4LjUtNy41czguNSAyLjkgOC41IDcuNXoiLz48L3N2Zz4%3D"></a>
+  <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-202022?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iIzFEQjk1NCIgZD0iTTIwLjQ1IDIwLjQ1aC0zLjU2di01LjU3YzAtMS4zMy0uMDItMy4wNC0xLjg1LTMuMDQtMS44NSAwLTIuMTQgMS40NS0yLjE0IDIuOTR2NS42N0g5LjM1VjloMy40MXYxLjU2aC4wNWMuNDgtLjkgMS42NC0xLjg1IDMuMzctMS44NSAzLjYgMCA0LjI3IDIuMzcgNC4yNyA1LjQ2djYuMjh6TTUuMzQgNy40M2EyLjA2IDIuMDYgMCAxIDEgMC00LjEzIDIuMDYgMi4wNiAwIDAgMSAwIDQuMTN6TTcuMTIgMjAuNDVIMy41NlY5aDMuNTZ2MTEuNDV6Ii8%2BPC9zdmc%2B"></a>
   <a href="mailto:contact@danielrajakumar.com"><img alt="Email" src="https://img.shields.io/badge/Email-202022?style=for-the-badge&logo=gmail&logoColor=1DB954"></a>
 </p>
 
