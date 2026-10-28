@@ -361,30 +361,6 @@ def card(p: dict, t: dict) -> str:
 """
 
 
-def chip(p: dict, t: dict) -> str:
-    """A small glass "Try it" chip that links to a live project, shown under the cards."""
-    label = f"Try {p['name']}"
-    w = round(len(label) * 8.6 + 82)
-    g_defs, g_style, g_under, g_over = glass(t, 8, 6, w - 16, 36, 18, delay=PROJECTS.index(p) * 1.5)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} 58" width="{w}" height="58" role="img" aria-label="{html.escape(label)}, live">
-  <title>{html.escape(label)}</title>
-  <defs>{g_defs}
-    <style>{g_style}
-      .label {{ font: 600 15px {SANS}; fill: {t['text']}; }}
-      .arrow {{ font: 600 15px {SANS}; fill: {t['green']}; }}
-      .dot {{ fill: {t['green']}; }}
-      .ping {{ fill: {t['green']}; transform-origin: 30px 24px; animation: ping 1.8s ease-out infinite; }}
-      @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.6); opacity: 0 }} }}
-      @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
-    </style>
-  </defs>{g_under}
-  <circle class="ping" cx="30" cy="24" r="4.5"/><circle class="dot" cx="30" cy="24" r="4.5"/>
-  <text class="label" x="44" y="29.5">{html.escape(label)}</text>
-  <text class="arrow" x="{w - 34}" y="29.5">↗</text>{g_over}
-</svg>
-"""
-
-
 def main() -> None:
     root = Path(__file__).resolve().parent.parent / "assets"
     root.mkdir(exist_ok=True)
@@ -393,8 +369,6 @@ def main() -> None:
         (root / f"hero-{name}.svg").write_text(hero(theme, status))
         for p in PROJECTS:
             (root / f"card-{p['slug']}-{name}.svg").write_text(card(p, theme))
-            if p["live"]:
-                (root / f"chip-{p['slug']}-{name}.svg").write_text(chip(p, theme))
 
 
 if __name__ == "__main__":

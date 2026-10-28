@@ -26,8 +26,8 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 </p>
 
 <p align="center">
-<a href="https://rockygpt.danielrajakumar.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chip-rockygpt-dark.svg"><img alt="Try RockyGPT, live" src="assets/chip-rockygpt-light.svg"></picture></a>
-<a href="https://projects.canogagame.danielrajakumar.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/chip-canoga-dark.svg"><img alt="Try Canoga Game, live" src="assets/chip-canoga-light.svg"></picture></a>
+  <a href="https://rockygpt.danielrajakumar.com"><img alt="Try RockyGPT, live" src="https://img.shields.io/badge/Try_RockyGPT-live-1DB954?style=for-the-badge&labelColor=202022"></a>
+  <a href="https://projects.canogagame.danielrajakumar.com"><img alt="Play Canoga Game, live" src="https://img.shields.io/badge/Play_Canoga_Game-live-1DB954?style=for-the-badge&labelColor=202022"></a>
 </p>
 
 ## Tools I use
