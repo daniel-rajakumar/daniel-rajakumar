@@ -24,6 +24,10 @@ jobs:
             generated/snake-dark.svg?palette=github-dark&color_snake=#F0FFF4&color_dots=#3A3F47,#1B6B3A,#16A34A,#1DB954,#86EFAC
             generated/snake-light.svg?palette=github-light&color_snake=#121212&color_dots=#E4E7EB,#A7F3C5,#4ADE80,#16A34A,#166534
 
+      # snk runs in a container, so its files belong to root.
+      - name: Remove the score bar under the snake
+        run: sudo python3 scripts/trim_snake.py generated/snake-dark.svg generated/snake-light.svg
+
       - name: Commit the new images
         run: |
           git config user.name "github-actions[bot]"
