@@ -1,106 +1,111 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Daniel Rajakumar, software engineer">
   <title>Daniel Rajakumar</title>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F5F7FF"/><stop offset="1" stop-color="#E6ECFF"/>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F7F8"/><stop offset="1" stop-color="#FFFFFF"/>
     </linearGradient>
-    <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#0891B2"><animate attributeName="stop-color" dur="6s" repeatCount="indefinite" values="#0891B2;#7C3AED;#DB2777;#0891B2"/></stop>
-      <stop offset="0.5" stop-color="#7C3AED"><animate attributeName="stop-color" dur="6s" repeatCount="indefinite" values="#7C3AED;#DB2777;#0891B2;#7C3AED"/></stop>
-      <stop offset="1" stop-color="#DB2777"><animate attributeName="stop-color" dur="6s" repeatCount="indefinite" values="#DB2777;#0891B2;#7C3AED;#DB2777"/></stop>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4E4E7"/><stop offset="0.5" stop-color="#E4E4E7" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#16A34A"/><stop offset="1" stop-color="#15803D"/>
     </linearGradient>
     <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#7C3AED" stop-opacity="0.55"/><stop offset="1" stop-color="#7C3AED" stop-opacity="0"/>
+      <stop offset="0" stop-color="#16A34A" stop-opacity="0.16"/><stop offset="1" stop-color="#16A34A" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#E6ECFF" stop-opacity="1"/><stop offset="0.35" stop-color="#E6ECFF" stop-opacity="0"/>
+    <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-50%" width="140%" height="200%">
-      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <clipPath id="card"><rect width="1200" height="400" rx="24"/></clipPath>
+    <linearGradient id="fadeT" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.4" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="inner"><rect x="16" y="16" width="1168" height="368" rx="20"/></clipPath>
     <style>
-      .star { fill: #0B1020; animation: twinkle ease-in-out infinite; }
-      @keyframes twinkle { 0%,100% { opacity: .15 } 50% { opacity: .9 } }
-      .grid line { stroke: #B7C3F2; stroke-width: 1; }
-      .floor { animation: roll 1.6s linear infinite; }
-      @keyframes roll { from { transform: translateY(0) } to { transform: translateY(14px) } }
-      .name { font: 800 68px 'SF Pro Display','Segoe UI',Inter,Helvetica,Arial,sans-serif; letter-spacing: 6px; fill: url(#name); }
-      .hello { font: 600 22px 'SF Mono',Menlo,Consolas,monospace; fill: #4B5A8C; letter-spacing: 4px; }
-      .role { font: 500 28px 'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #0B1020; }
-      .prompt { font: 500 28px 'SF Mono',Menlo,Consolas,monospace; fill: #0891B2; }
-      .cursor { fill: #0891B2; }
-      .pill { fill: #FFFFFF; stroke: #B7C3F2; }
-      .pilltext { font: 600 16px 'SF Pro Text','Segoe UI',Helvetica,Arial,sans-serif; fill: #0B1020; }
-      .dot { fill: #059669; }
-      .ping { fill: #059669; transform-origin: 46px 330px; animation: ping 1.8s ease-out infinite; }
-      @keyframes ping { from { transform: scale(1); opacity: .7 } to { transform: scale(3); opacity: 0 } }
+      .grid line { stroke: #16A34A; stroke-opacity: 0.25; stroke-width: 1; }
+      .floor { animation: roll 1.8s linear infinite; }
+      @keyframes roll { from { transform: translateY(0) } to { transform: translateY(12px) } }
+      .glow { animation: breathe 6s ease-in-out infinite; transform-origin: 900px 260px; }
+      @keyframes breathe { 0%,100% { opacity: .75; transform: scale(1) } 50% { opacity: 1; transform: scale(1.06) } }
+      .hello { font: 500 18px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #71717A; letter-spacing: 3px; }
+      .name { font: 600 60px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #121212; letter-spacing: .5px; }
+      .bar { fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 64px 0; }
+      @keyframes grow { from { transform: scaleX(.55) } to { transform: scaleX(1) } }
+      .role { font: 400 26px 'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #3F3F46; }
+      .prompt { font: 600 26px 'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #16A34A; }
+      .cursor { fill: #16A34A; }
+      .pill { fill: #F0FDF4; stroke: #16A34A; stroke-opacity: .45; }
+      .pilltext { font: 500 15px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #16A34A; }
+      .dot { fill: #16A34A; }
+      .ping { fill: #16A34A; transform-origin: 86px 318px; animation: ping 1.8s ease-out infinite; }
+      @keyframes ping { from { transform: scale(1); opacity: .6 } to { transform: scale(2.8); opacity: 0 } }
       @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
     </style>
   </defs>
-  <g clip-path="url(#card)">
-    <rect width="1200" height="400" fill="url(#bg)"/>
-    <circle cx="0" cy="10" r="0.8" class="star" style="animation-duration:2s;animation-delay:-0s"/><circle cx="317" cy="99" r="1.3" class="star" style="animation-duration:3s;animation-delay:-1s"/><circle cx="634" cy="188" r="1.8" class="star" style="animation-duration:4s;animation-delay:-2s"/><circle cx="951" cy="47" r="0.8" class="star" style="animation-duration:5s;animation-delay:-3s"/><circle cx="68" cy="136" r="1.3" class="star" style="animation-duration:6s;animation-delay:-4s"/><circle cx="385" cy="225" r="1.8" class="star" style="animation-duration:2s;animation-delay:-5s"/><circle cx="702" cy="84" r="0.8" class="star" style="animation-duration:3s;animation-delay:-6s"/><circle cx="1019" cy="173" r="1.3" class="star" style="animation-duration:4s;animation-delay:-0s"/><circle cx="136" cy="32" r="1.8" class="star" style="animation-duration:5s;animation-delay:-1s"/><circle cx="453" cy="121" r="0.8" class="star" style="animation-duration:6s;animation-delay:-2s"/><circle cx="770" cy="210" r="1.3" class="star" style="animation-duration:2s;animation-delay:-3s"/><circle cx="1087" cy="69" r="1.8" class="star" style="animation-duration:3s;animation-delay:-4s"/><circle cx="204" cy="158" r="0.8" class="star" style="animation-duration:4s;animation-delay:-5s"/><circle cx="521" cy="17" r="1.3" class="star" style="animation-duration:5s;animation-delay:-6s"/><circle cx="838" cy="106" r="1.8" class="star" style="animation-duration:6s;animation-delay:-0s"/><circle cx="1155" cy="195" r="0.8" class="star" style="animation-duration:2s;animation-delay:-1s"/>
-    <circle cx="600" cy="300" r="260" fill="url(#sun)"/>
-    <g class="grid"><g class="floor"><line x1="0" y1="301.6" x2="1200" y2="301.6"/><line x1="0" y1="306.4" x2="1200" y2="306.4"/><line x1="0" y1="314.4" x2="1200" y2="314.4"/><line x1="0" y1="325.6" x2="1200" y2="325.6"/><line x1="0" y1="340.0" x2="1200" y2="340.0"/><line x1="0" y1="357.6" x2="1200" y2="357.6"/><line x1="0" y1="378.4" x2="1200" y2="378.4"/><line x1="0" y1="402.4" x2="1200" y2="402.4"/><line x1="0" y1="429.6" x2="1200" y2="429.6"/><line x1="0" y1="460.0" x2="1200" y2="460.0"/><line x1="0" y1="493.6" x2="1200" y2="493.6"/><line x1="0" y1="530.4" x2="1200" y2="530.4"/><line x1="600" y1="300" x2="-1220" y2="560"/><line x1="600" y1="300" x2="-1090" y2="560"/><line x1="600" y1="300" x2="-960" y2="560"/><line x1="600" y1="300" x2="-830" y2="560"/><line x1="600" y1="300" x2="-700" y2="560"/><line x1="600" y1="300" x2="-570" y2="560"/><line x1="600" y1="300" x2="-440" y2="560"/><line x1="600" y1="300" x2="-310" y2="560"/><line x1="600" y1="300" x2="-180" y2="560"/><line x1="600" y1="300" x2="-50" y2="560"/><line x1="600" y1="300" x2="80" y2="560"/><line x1="600" y1="300" x2="210" y2="560"/><line x1="600" y1="300" x2="340" y2="560"/><line x1="600" y1="300" x2="470" y2="560"/><line x1="600" y1="300" x2="600" y2="560"/><line x1="600" y1="300" x2="730" y2="560"/><line x1="600" y1="300" x2="860" y2="560"/><line x1="600" y1="300" x2="990" y2="560"/><line x1="600" y1="300" x2="1120" y2="560"/><line x1="600" y1="300" x2="1250" y2="560"/><line x1="600" y1="300" x2="1380" y2="560"/><line x1="600" y1="300" x2="1510" y2="560"/><line x1="600" y1="300" x2="1640" y2="560"/><line x1="600" y1="300" x2="1770" y2="560"/><line x1="600" y1="300" x2="1900" y2="560"/><line x1="600" y1="300" x2="2030" y2="560"/><line x1="600" y1="300" x2="2160" y2="560"/><line x1="600" y1="300" x2="2290" y2="560"/><line x1="600" y1="300" x2="2420" y2="560"/></g></g>
-    <rect y="290" width="1200" height="110" fill="url(#fade)"/>
 
-    <text class="hello" x="60" y="92">HI, I'M</text>
-    <text class="name" x="56" y="170">DANIEL RAJAKUMAR</text>
+  <rect x="16" y="16" width="1168" height="368" rx="20" fill="url(#card)"/>
+  <g clip-path="url(#inner)">
+    <circle class="glow" cx="900" cy="260" r="230" fill="url(#sun)"/>
+    <g class="grid"><g class="floor"><line x1="560" y1="261.4" x2="1180" y2="261.4"/><line x1="560" y1="265.6" x2="1180" y2="265.6"/><line x1="560" y1="272.6" x2="1180" y2="272.6"/><line x1="560" y1="282.4" x2="1180" y2="282.4"/><line x1="560" y1="295.0" x2="1180" y2="295.0"/><line x1="560" y1="310.4" x2="1180" y2="310.4"/><line x1="560" y1="328.6" x2="1180" y2="328.6"/><line x1="560" y1="349.6" x2="1180" y2="349.6"/><line x1="560" y1="373.4" x2="1180" y2="373.4"/><line x1="560" y1="400.0" x2="1180" y2="400.0"/><line x1="560" y1="429.4" x2="1180" y2="429.4"/><line x1="900" y1="260" x2="90" y2="440"/><line x1="900" y1="260" x2="180" y2="440"/><line x1="900" y1="260" x2="270" y2="440"/><line x1="900" y1="260" x2="360" y2="440"/><line x1="900" y1="260" x2="450" y2="440"/><line x1="900" y1="260" x2="540" y2="440"/><line x1="900" y1="260" x2="630" y2="440"/><line x1="900" y1="260" x2="720" y2="440"/><line x1="900" y1="260" x2="810" y2="440"/><line x1="900" y1="260" x2="900" y2="440"/><line x1="900" y1="260" x2="990" y2="440"/><line x1="900" y1="260" x2="1080" y2="440"/><line x1="900" y1="260" x2="1170" y2="440"/><line x1="900" y1="260" x2="1260" y2="440"/><line x1="900" y1="260" x2="1350" y2="440"/><line x1="900" y1="260" x2="1440" y2="440"/><line x1="900" y1="260" x2="1530" y2="440"/><line x1="900" y1="260" x2="1620" y2="440"/><line x1="900" y1="260" x2="1710" y2="440"/></g></g>
+    <rect x="16" y="16" width="1168" height="368" fill="url(#fadeL)"/>
+  </g>
+  <rect x="16.5" y="16.5" width="1167" height="367" rx="20" fill="none" stroke="url(#edge)"/>
 
-    <g transform="translate(60 248)">
-      <text class="prompt" x="0" y="0">&gt;</text>
-      <g transform="translate(34 0)">
+  <text class="hello" x="64" y="92">HI, I'M</text>
+  <text class="name" x="62" y="160">Daniel Rajakumar</text>
+  <rect class="bar" x="64" y="180" width="64" height="6" rx="3"/>
+
+  <g transform="translate(64 246)">
+    <text class="prompt" x="0" y="0">&gt;</text>
+    <g transform="translate(30 0)">
     <clipPath id="clip0"><rect x="0" y="-40" height="60" width="0">
       <animate attributeName="width" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.0750;0.1875;0.2250;0.2500;1.0000" values="0;289.6;289.6;0;0;0"/>
+        keyTimes="0.0000;0.0750;0.1875;0.2250;0.2500;1.0000" values="0;269.2;269.2;0;0;0"/>
     </rect></clipPath>
     <g clip-path="url(#clip0)"><text class="role" x="0" y="0">Software Engineer</text></g>
-    <rect class="cursor" x="0" y="-26" width="3" height="32" opacity="0">
+    <rect class="cursor" x="0" y="-23" width="3" height="29" opacity="0">
       <animate attributeName="x" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.0750;0.1875;0.2250;0.2500;1.0000" values="0.0;289.6;289.6;0.0;0.0;0.0"/>
+        keyTimes="0.0000;0.0750;0.1875;0.2250;0.2500;1.0000" values="0;269.2;269.2;0;0;0"/>
       <animate attributeName="opacity" dur="16s" repeatCount="indefinite" calcMode="discrete"
         keyTimes="0;0.0000;0.2500" values="0;1;0"/>
     </rect>
     <clipPath id="clip1"><rect x="0" y="-40" height="60" width="0">
       <animate attributeName="width" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.2500;0.3250;0.4375;0.4750;0.5000;1.0000" values="0;0;289.6;289.6;0;0;0"/>
+        keyTimes="0.0000;0.2500;0.3250;0.4375;0.4750;0.5000;1.0000" values="0;0;269.2;269.2;0;0;0"/>
     </rect></clipPath>
     <g clip-path="url(#clip1)"><text class="role" x="0" y="0">Building RockyGPT</text></g>
-    <rect class="cursor" x="0" y="-26" width="3" height="32" opacity="0">
+    <rect class="cursor" x="0" y="-23" width="3" height="29" opacity="0">
       <animate attributeName="x" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.2500;0.3250;0.4375;0.4750;0.5000;1.0000" values="0.0;0.0;289.6;289.6;0.0;0.0;0.0"/>
+        keyTimes="0.0000;0.2500;0.3250;0.4375;0.4750;0.5000;1.0000" values="0;0;269.2;269.2;0;0;0"/>
       <animate attributeName="opacity" dur="16s" repeatCount="indefinite" calcMode="discrete"
         keyTimes="0;0.2500;0.5000" values="0;1;0"/>
     </rect>
     <clipPath id="clip2"><rect x="0" y="-40" height="60" width="0">
       <animate attributeName="width" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.5000;0.5750;0.6875;0.7250;0.7500;1.0000" values="0;0;424.0;424.0;0;0;0"/>
+        keyTimes="0.0000;0.5000;0.5750;0.6875;0.7250;0.7500;1.0000" values="0;0;394.0;394.0;0;0;0"/>
     </rect></clipPath>
     <g clip-path="url(#clip2)"><text class="role" x="0" y="0">Retrieval systems + evals</text></g>
-    <rect class="cursor" x="0" y="-26" width="3" height="32" opacity="0">
+    <rect class="cursor" x="0" y="-23" width="3" height="29" opacity="0">
       <animate attributeName="x" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.5000;0.5750;0.6875;0.7250;0.7500;1.0000" values="0.0;0.0;424.0;424.0;0.0;0.0;0.0"/>
+        keyTimes="0.0000;0.5000;0.5750;0.6875;0.7250;0.7500;1.0000" values="0;0;394.0;394.0;0;0;0"/>
       <animate attributeName="opacity" dur="16s" repeatCount="indefinite" calcMode="discrete"
         keyTimes="0;0.5000;0.7500" values="0;1;0"/>
     </rect>
     <clipPath id="clip3"><rect x="0" y="-40" height="60" width="0">
       <animate attributeName="width" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.7500;0.8250;0.9375;0.9750;1.0000" values="0;0;491.2;491.2;0;0"/>
+        keyTimes="0.0000;0.7500;0.8250;0.9375;0.9750;1.0000" values="0;0;456.4;456.4;0;0"/>
     </rect></clipPath>
     <g clip-path="url(#clip3)"><text class="role" x="0" y="0">Next.js · TypeScript · Python</text></g>
-    <rect class="cursor" x="0" y="-26" width="3" height="32" opacity="0">
+    <rect class="cursor" x="0" y="-23" width="3" height="29" opacity="0">
       <animate attributeName="x" dur="16s" repeatCount="indefinite"
-        keyTimes="0.0000;0.7500;0.8250;0.9375;0.9750;1.0000" values="0.0;0.0;491.2;491.2;0.0;0.0"/>
+        keyTimes="0.0000;0.7500;0.8250;0.9375;0.9750;1.0000" values="0;0;456.4;456.4;0;0"/>
       <animate attributeName="opacity" dur="16s" repeatCount="indefinite" calcMode="discrete"
         keyTimes="0;0.7500;1.0000" values="0;1;0"/>
     </rect>
-      </g>
     </g>
-
-    <rect class="pill" x="28" y="312" width="350" height="36" rx="18"/>
-    <circle class="ping" cx="46" cy="330" r="6"/>
-    <circle class="dot" cx="46" cy="330" r="6"/>
-    <text class="pilltext" x="62" y="336">Online · New Jersey · Ramapo CS '26</text>
   </g>
+
+  <rect class="pill" x="64" y="298" width="296" height="40" rx="20"/>
+  <circle class="ping" cx="86" cy="318" r="5"/>
+  <circle class="dot" cx="86" cy="318" r="5"/>
+  <text class="pilltext" x="102" y="323">Open to New Grad SWE Roles</text>
 </svg>

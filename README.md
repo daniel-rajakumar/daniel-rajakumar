@@ -4,10 +4,10 @@
 </picture>
 
 <p align="center">
-  <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-0B1020?style=for-the-badge&logo=googlechrome&logoColor=22D3EE"></a>
-  <a href="https://rockygpt.danielrajakumar.com"><img alt="RockyGPT" src="https://img.shields.io/badge/RockyGPT-live-7C3AED?style=for-the-badge&logo=probot&logoColor=white"></a>
-  <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
-  <a href="mailto:contact@danielrajakumar.com"><img alt="Email" src="https://img.shields.io/badge/Email-DB2777?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-202022?style=for-the-badge&logo=googlechrome&logoColor=1DB954"></a>
+  <a href="https://rockygpt.danielrajakumar.com"><img alt="RockyGPT" src="https://img.shields.io/badge/RockyGPT-live-1DB954?style=for-the-badge&logo=probot&logoColor=1DB954&labelColor=202022"></a>
+  <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-202022?style=for-the-badge&logo=linkedin&logoColor=1DB954"></a>
+  <a href="mailto:contact@danielrajakumar.com"><img alt="Email" src="https://img.shields.io/badge/Email-202022?style=for-the-badge&logo=gmail&logoColor=1DB954"></a>
 </p>
 
 I build full-stack web apps in TypeScript and Next.js, lately with a focus on retrieval systems and the tests that keep them honest.
@@ -16,7 +16,7 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 - 💼 Software engineering intern at **dsm-firmenich**, where I built and launched an internal assessment platform as the sole developer
 - 🤖 Building **[RockyGPT](https://rockygpt.danielrajakumar.com)**, a campus assistant for Ramapo that answers with linked sources
 
-## ⚡ What I've built
+## What I've built
 
 | Project | What it is | Built with |
 | --- | --- | --- |
@@ -27,20 +27,20 @@ I build full-stack web apps in TypeScript and Next.js, lately with a focus on re
 | **[Image Splitter](https://github.com/daniel-rajakumar/imageSplitter)** · [try it](https://image-splitter-eight.vercel.app) | Cuts one image into a grid of tiles for Instagram carousels and profile grids. | JavaScript |
 | **[Photography](https://github.com/daniel-rajakumar/photography-website)** · [view](https://photography-website-ebon.vercel.app) | My photo gallery, with swipe filters and camera details for each shot. | Next.js, TypeScript |
 
-## 🛠️ Tools I use
+## Tools I use
 
 <p align="center">
   <img alt="TypeScript, JavaScript, Python, C++, Java, Next.js, React, FastAPI, PostgreSQL, Redis, Docker, AWS" src="https://skillicons.dev/icons?i=ts,js,py,cpp,java,nextjs,react,fastapi,postgres,redis,docker,aws&perline=12">
 </p>
 
-## 📈 My year in code
+## My year in code
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="generated/snake-dark.svg">
   <img alt="A snake eating my GitHub contribution graph, updated daily" src="generated/snake-light.svg" width="100%">
 </picture>
 
-## 🌙 Outside of code
+## Outside of code
 
 - Led Ramapo's Google Developer Student Club and organized the college's first DevFest
 - Founded Ramapo's Computer Science Club

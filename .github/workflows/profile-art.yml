@@ -21,8 +21,8 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            generated/snake-dark.svg?palette=github-dark&color_snake=#22D3EE&color_dots=#161B22,#1E2A5E,#3B3FA8,#7C3AED,#C084FC
-            generated/snake-light.svg?palette=github-light&color_snake=#7C3AED&color_dots=#EBEDF0,#C7D2FE,#A5B4FC,#818CF8,#6366F1
+            generated/snake-dark.svg?palette=github-dark&color_snake=#1DB954&color_dots=#202022,#0E4429,#006D32,#1DB954,#39D353
+            generated/snake-light.svg?palette=github-light&color_snake=#16A34A&color_dots=#EBEDF0,#9BE9A8,#40C463,#30A14E,#216E39
 
       - name: Commit the new images
         run: |
