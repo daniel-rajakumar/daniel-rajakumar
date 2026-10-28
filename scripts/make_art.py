@@ -99,14 +99,6 @@ PROJECTS = [
         "live": False,
     },
     {
-        "slug": "canoga",
-        "name": "Canoga Game",
-        "tagline": "Dice-and-strategy board game",
-        "about": "Web, command-line, and Android versions of the same game, each with a computer opponent.",
-        "tags": ["JavaScript", "C++", "Java"],
-        "live": True,
-    },
-    {
         "slug": "vc370",
         "name": "VC370",
         "tagline": "Assembler and emulator",
@@ -115,19 +107,19 @@ PROJECTS = [
         "live": False,
     },
     {
+        "slug": "canoga",
+        "name": "Canoga Game",
+        "tagline": "Dice-and-strategy board game",
+        "about": "Web, command-line, and Android versions of the same game, each with a computer opponent.",
+        "tags": ["JavaScript", "C++", "Java"],
+        "live": True,
+    },
+    {
         "slug": "image-splitter",
         "name": "Image Splitter",
         "tagline": "Grid maker for Instagram",
         "about": "Cuts one image into a grid of tiles for carousels, profile grids, and posters, with pinch-to-zoom on phones.",
         "tags": ["JavaScript"],
-        "live": True,
-    },
-    {
-        "slug": "photography",
-        "name": "Photography",
-        "tagline": "My photo gallery",
-        "about": "Swipe through my photos with filters and the camera details for each shot. Installs like an app.",
-        "tags": ["Next.js", "TypeScript"],
         "live": True,
     },
 ]
