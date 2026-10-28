@@ -4,7 +4,37 @@
     <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#16A34A"/><stop offset="1" stop-color="#15803D"/>
     </linearGradient>
+    <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.1"/>
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="glassSpec" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="0.7" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0.35" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.5"/>
+      <stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <mask id="glassOutside">
+      <rect width="100%" height="100%" fill="#FFF"/>
+      <rect x="12" y="8" width="396" height="212" rx="20" fill="#000"/>
+    </mask>
+    <clipPath id="glassClip"><rect x="12" y="8" width="396" height="212" rx="20"/></clipPath>
     <style>
+      .sheen { animation: sheen 9s ease-in-out infinite; animation-delay: 0s; }
+      @keyframes sheen { 0%, 55% { transform: translateX(-396px) } 100% { transform: translateX(396px) } }
       .name { font: 600 22px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #121212; }
       .tagline { font: 500 13px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #16A34A; }
       .about { font: 400 14px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #3F3F46; }
@@ -12,18 +42,24 @@
       .tagtext { font: 500 12px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #3F3F46; }
       .livetext { font: 500 12px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #16A34A; }
       .dot { fill: #16A34A; }
-      .ping { fill: #16A34A; transform-origin: 378px 38px; animation: ping 1.8s ease-out infinite; }
+      .ping { fill: #16A34A; transform-origin: 382px 38px; animation: ping 1.8s ease-out infinite; }
       @keyframes ping { from { transform: scale(1); opacity: .6 } to { transform: scale(2.8); opacity: 0 } }
-      .bar { fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 28px 0; }
+      .bar { fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 34px 0; }
       @keyframes grow { from { transform: scaleX(.55) } to { transform: scaleX(1) } }
       @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
     </style>
   </defs>
-  <rect x="4.5" y="4.5" width="411" height="227" rx="18" fill="#000000" fill-opacity="0.02" stroke="#000000" stroke-opacity="0.1"/>
-  <text class="name" x="28" y="46">RockyGPT</text>
-  <circle class="ping" cx="378" cy="38" r="4.5"/><circle class="dot" cx="378" cy="38" r="4.5"/><text class="livetext" x="364" y="43" text-anchor="end">Live</text>
-  <text class="tagline" x="28" y="70">Campus AI assistant</text>
-  <rect class="bar" x="28" y="82" width="36" height="4" rx="2"/>
-  <text class="about" x="28" y="112">Answers Ramapo questions on dining, events, transit,</text><text class="about" x="28" y="133">and housing, and cites a source for every answer.</text><text class="about" x="28" y="154">Tuned against 2,200+ scored queries.</text>
-  <rect class="tag" x="28" y="186" width="72" height="26" rx="13"/><text class="tagtext" x="64" y="203.5" text-anchor="middle">Next.js</text><rect class="tag" x="108" y="186" width="93" height="26" rx="13"/><text class="tagtext" x="154.5" y="203.5" text-anchor="middle">TypeScript</text><rect class="tag" x="209" y="186" width="93" height="26" rx="13"/><text class="tagtext" x="255.5" y="203.5" text-anchor="middle">PostgreSQL</text><rect class="tag" x="310" y="186" width="79" height="26" rx="13"/><text class="tagtext" x="349.5" y="203.5" text-anchor="middle">pgvector</text>
+
+  <rect x="12" y="14" width="396" height="212" rx="20" fill="#000" fill-opacity="0.12" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
+  <rect x="12" y="8" width="396" height="212" rx="20" fill="url(#glassFill)"/>
+  <g clip-path="url(#glassClip)"><rect class="sheen" x="12" y="8" width="396" height="212" fill="url(#glassSheen)"/></g>
+  <text class="name" x="34" y="46">RockyGPT</text>
+  <circle class="ping" cx="382" cy="38" r="4.5"/><circle class="dot" cx="382" cy="38" r="4.5"/><text class="livetext" x="368" y="43" text-anchor="end">Live</text>
+  <text class="tagline" x="34" y="70">Campus AI assistant</text>
+  <rect class="bar" x="34" y="82" width="36" height="4" rx="2"/>
+  <text class="about" x="34" y="112">Answers Ramapo questions on dining, events,</text><text class="about" x="34" y="133">transit, and housing, citing a source for every</text><text class="about" x="34" y="154">answer. Tuned on 2,200+ scored queries.</text>
+  <rect class="tag" x="34" y="178" width="67" height="26" rx="13"/><text class="tagtext" x="67.5" y="195.5" text-anchor="middle">Next.js</text><rect class="tag" x="107" y="178" width="87" height="26" rx="13"/><text class="tagtext" x="150.5" y="195.5" text-anchor="middle">TypeScript</text><rect class="tag" x="200" y="178" width="87" height="26" rx="13"/><text class="tagtext" x="243.5" y="195.5" text-anchor="middle">PostgreSQL</text><rect class="tag" x="293" y="178" width="74" height="26" rx="13"/><text class="tagtext" x="330" y="195.5" text-anchor="middle">pgvector</text>
+
+  <rect x="12.5" y="8.5" width="395" height="211" rx="20" fill="none" stroke="url(#glassEdge)"/>
+  <rect x="32" y="8.5" width="356" height="1" fill="url(#glassSpec)"/>
 </svg>

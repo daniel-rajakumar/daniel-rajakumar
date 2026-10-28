@@ -43,6 +43,15 @@ THEMES = {
         "green2": "#279B59",
         "pill": "#1E1E1F",
         "glow": 0.30,
+        # Glass: a frosted fill, a bright top edge, a soft shadow, and a passing sheen.
+        "glass_top": 0.10,
+        "glass_bot": 0.025,
+        "edge": "#FFFFFF",
+        "edge_hi": 0.45,
+        "edge_lo": 0.07,
+        "shadow_op": 0.45,
+        "sheen": 0.07,
+        "spec": 0.55,
         "ink": "#FFFFFF",
         "wash": 0.035,
         "line": 0.12,
@@ -61,6 +70,14 @@ THEMES = {
         "green2": "#15803D",
         "pill": "#F0FDF4",
         "glow": 0.16,
+        "glass_top": 0.85,
+        "glass_bot": 0.55,
+        "edge": "#000000",
+        "edge_hi": 0.10,
+        "edge_lo": 0.04,
+        "shadow_op": 0.12,
+        "sheen": 0.5,
+        "spec": 0.9,
         "ink": "#000000",
         "wash": 0.02,
         "line": 0.10,
@@ -86,7 +103,7 @@ PROJECTS = [
         "slug": "rockygpt",
         "name": "RockyGPT",
         "tagline": "Campus AI assistant",
-        "about": "Answers Ramapo questions on dining, events, transit, and housing, and cites a source for every answer. Tuned against 2,200+ scored queries.",
+        "about": "Answers Ramapo questions on dining, events, transit, and housing, citing a source for every answer. Tuned on 2,200+ scored queries.",
         "tags": ["Next.js", "TypeScript", "PostgreSQL", "pgvector"],
         "live": True,
     },
@@ -153,8 +170,57 @@ def role_groups() -> str:
     return "".join(out)
 
 
+def glass(t: dict, x: float, y: float, w: float, h: float, rx: float, delay: float = 0) -> tuple[str, str, str, str]:
+    """An Apple-style glass panel, as (defs, styles, layers under the content, layers over it).
+
+    The shadow is masked out under the panel so the glass stays clear, and a
+    soft band of light sweeps across it every few seconds.
+    """
+    defs = f"""
+    <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="{t['glass_top']}"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="{t['glass_bot']}"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="{t['edge']}" stop-opacity="{t['edge_hi']}"/>
+      <stop offset="0.45" stop-color="{t['edge']}" stop-opacity="{t['edge_lo']}"/>
+      <stop offset="1" stop-color="{t['edge']}" stop-opacity="{t['edge_hi'] * 0.5:g}"/>
+    </linearGradient>
+    <linearGradient id="glassSpec" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#FFFFFF" stop-opacity="{t['spec']}"/>
+      <stop offset="0.7" stop-color="#FFFFFF" stop-opacity="{t['spec']}"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0.35" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="{t['sheen']}"/>
+      <stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <mask id="glassOutside">
+      <rect width="100%" height="100%" fill="#FFF"/>
+      <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#000"/>
+    </mask>
+    <clipPath id="glassClip"><rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}"/></clipPath>"""
+    style = f"""
+      .sheen {{ animation: sheen 9s ease-in-out infinite; animation-delay: {delay:g}s; }}
+      @keyframes sheen {{ 0%, 55% {{ transform: translateX(-{w:g}px) }} 100% {{ transform: translateX({w:g}px) }} }}"""
+    under = f"""
+  <rect x="{x}" y="{y + 6}" width="{w}" height="{h}" rx="{rx}" fill="#000" fill-opacity="{t['shadow_op']}" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
+  <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="url(#glassFill)"/>
+  <g clip-path="url(#glassClip)"><rect class="sheen" x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#glassSheen)"/></g>"""
+    over = f"""
+  <rect x="{x + 0.5}" y="{y + 0.5}" width="{w - 1}" height="{h - 1}" rx="{rx}" fill="none" stroke="url(#glassEdge)"/>
+  <rect x="{x + rx}" y="{y + 0.5}" width="{w - 2 * rx}" height="1" fill="url(#glassSpec)"/>"""
+    return defs, style, under, over
+
+
 def hero(t: dict, status: str) -> str:
     status_w = round(len(status) * 8.2 + 34)
+    g_defs, g_style, g_under, g_over = glass(t, 16, 10, 1168, 372, 24)
     # A receding floor grid on the right half, fading toward the text.
     grid_lines = []
     for k in range(1, 12):
@@ -176,14 +242,17 @@ def hero(t: dict, status: str) -> str:
     <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#000"/><stop offset="0.45" stop-color="#FFF"/>
     </linearGradient>
-    <mask id="fade"><rect x="6" y="6" width="1188" height="388" fill="url(#fadeL)"/></mask>
-    <clipPath id="inner"><rect x="6" y="6" width="1188" height="388" rx="20"/></clipPath>
+    <mask id="fade"><rect x="16" y="10" width="1168" height="372" fill="url(#fadeL)"/></mask>
+    <clipPath id="inner"><rect x="16" y="10" width="1168" height="372" rx="24"/></clipPath>
+    <filter id="blob" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>{g_defs}
     <style>
       .grid line {{ stroke: {t['green']}; stroke-opacity: {t['grid_op']}; stroke-width: 1; }}
       .floor {{ animation: roll 1.8s linear infinite; }}
       @keyframes roll {{ from {{ transform: translateY(0) }} to {{ transform: translateY(12px) }} }}
       .glow {{ animation: breathe 6s ease-in-out infinite; transform-origin: 900px 260px; }}
       @keyframes breathe {{ 0%,100% {{ opacity: .75; transform: scale(1) }} 50% {{ opacity: 1; transform: scale(1.06) }} }}
+      .drift {{ animation: drift 14s ease-in-out infinite alternate; }}
+      @keyframes drift {{ from {{ transform: translate(0, 0) }} to {{ transform: translate(140px, -40px) }} }}{g_style}
       .hello {{ font: 500 18px {SANS}; fill: {t['dim']}; letter-spacing: 3px; }}
       .name {{ font: 600 60px {SANS}; fill: {t['text']}; letter-spacing: .5px; }}
       .bar {{ fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 64px 0; }}
@@ -202,7 +271,10 @@ def hero(t: dict, status: str) -> str:
     </style>
   </defs>
 
-  <rect x="6.5" y="6.5" width="1187" height="387" rx="20" fill="{t['ink']}" fill-opacity="{t['wash']}" stroke="{t['ink']}" stroke-opacity="{t['line']}"/>
+{g_under}
+  <g clip-path="url(#inner)">
+    <circle class="drift" cx="240" cy="330" r="130" fill="{t['green']}" fill-opacity="{t['glow'] * 0.4:g}" filter="url(#blob)"/>
+  </g>
   <g clip-path="url(#inner)" mask="url(#fade)">
     <circle class="glow" cx="900" cy="260" r="230" fill="url(#sun)"/>
     <g class="grid"><g class="floor">{''.join(grid_lines)}</g></g>
@@ -225,6 +297,7 @@ def hero(t: dict, status: str) -> str:
 
   <rect class="status" x="376" y="298" width="{status_w}" height="40" rx="20"/>
   <text class="statustext" x="394" y="323">{html.escape(status)}</text>
+{g_over}
 </svg>
 """
 
@@ -232,24 +305,26 @@ def hero(t: dict, status: str) -> str:
 def card(p: dict, t: dict) -> str:
     """A project card shaped like the cards on danielrajakumar.com.
 
-    The card itself is a faint see-through wash, so it sits on GitHub's dark,
-    dimmed, or light page without looking like a separate block.
+    The card is a pane of glass, so it sits on GitHub's dark, dimmed, or
+    light page without looking like a separate block.
     """
-    about = textwrap.wrap(p["about"], 52)[:3]
+    g_defs, g_style, g_under, g_over = glass(t, 12, 8, 396, 212, 20, delay=PROJECTS.index(p) * 1.5)
+    about = textwrap.wrap(p["about"], 50)
+    assert len(about) <= 3, f"{p['name']}: the description needs more than 3 lines"
     about_lines = "".join(
-        f'<text class="about" x="28" y="{112 + i * 21}">{html.escape(line)}</text>' for i, line in enumerate(about)
+        f'<text class="about" x="34" y="{112 + i * 21}">{html.escape(line)}</text>' for i, line in enumerate(about)
     )
-    tags, x = [], 28
+    tags, x = [], 34
     for tag in p["tags"]:
-        w = round(len(tag) * 7.1 + 22)
+        w = round(len(tag) * 6.7 + 20)
         tags.append(
-            f'<rect class="tag" x="{x}" y="186" width="{w}" height="26" rx="13"/>'
-            f'<text class="tagtext" x="{x + w / 2:g}" y="203.5" text-anchor="middle">{html.escape(tag)}</text>'
+            f'<rect class="tag" x="{x}" y="178" width="{w}" height="26" rx="13"/>'
+            f'<text class="tagtext" x="{x + w / 2:g}" y="195.5" text-anchor="middle">{html.escape(tag)}</text>'
         )
-        x += w + 8
+        x += w + 6
     live = (
-        '<circle class="ping" cx="378" cy="38" r="4.5"/><circle class="dot" cx="378" cy="38" r="4.5"/>'
-        '<text class="livetext" x="364" y="43" text-anchor="end">Live</text>'
+        '<circle class="ping" cx="382" cy="38" r="4.5"/><circle class="dot" cx="382" cy="38" r="4.5"/>'
+        '<text class="livetext" x="368" y="43" text-anchor="end">Live</text>'
         if p["live"]
         else ""
     )
@@ -258,8 +333,8 @@ def card(p: dict, t: dict) -> str:
   <defs>
     <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="{t['green']}"/><stop offset="1" stop-color="{t['green2']}"/>
-    </linearGradient>
-    <style>
+    </linearGradient>{g_defs}
+    <style>{g_style}
       .name {{ font: 600 22px {SANS}; fill: {t['text']}; }}
       .tagline {{ font: 500 13px {SANS}; fill: {t['green']}; }}
       .about {{ font: 400 14px {SANS}; fill: {t['muted']}; }}
@@ -267,20 +342,21 @@ def card(p: dict, t: dict) -> str:
       .tagtext {{ font: 500 12px {SANS}; fill: {t['muted']}; }}
       .livetext {{ font: 500 12px {SANS}; fill: {t['green']}; }}
       .dot {{ fill: {t['green']}; }}
-      .ping {{ fill: {t['green']}; transform-origin: 378px 38px; animation: ping 1.8s ease-out infinite; }}
+      .ping {{ fill: {t['green']}; transform-origin: 382px 38px; animation: ping 1.8s ease-out infinite; }}
       @keyframes ping {{ from {{ transform: scale(1); opacity: .6 }} to {{ transform: scale(2.8); opacity: 0 }} }}
-      .bar {{ fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 28px 0; }}
+      .bar {{ fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 34px 0; }}
       @keyframes grow {{ from {{ transform: scaleX(.55) }} to {{ transform: scaleX(1) }} }}
       @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}
     </style>
   </defs>
-  <rect x="4.5" y="4.5" width="411" height="227" rx="18" fill="{t['ink']}" fill-opacity="{t['wash']}" stroke="{t['ink']}" stroke-opacity="{t['line']}"/>
-  <text class="name" x="28" y="46">{html.escape(p['name'])}</text>
+{g_under}
+  <text class="name" x="34" y="46">{html.escape(p['name'])}</text>
   {live}
-  <text class="tagline" x="28" y="70">{html.escape(p['tagline'])}</text>
-  <rect class="bar" x="28" y="82" width="36" height="4" rx="2"/>
+  <text class="tagline" x="34" y="70">{html.escape(p['tagline'])}</text>
+  <rect class="bar" x="34" y="82" width="36" height="4" rx="2"/>
   {about_lines}
   {''.join(tags)}
+{g_over}
 </svg>
 """
 

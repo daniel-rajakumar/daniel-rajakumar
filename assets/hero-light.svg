@@ -11,14 +11,47 @@
     <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#000"/><stop offset="0.45" stop-color="#FFF"/>
     </linearGradient>
-    <mask id="fade"><rect x="6" y="6" width="1188" height="388" fill="url(#fadeL)"/></mask>
-    <clipPath id="inner"><rect x="6" y="6" width="1188" height="388" rx="20"/></clipPath>
+    <mask id="fade"><rect x="16" y="10" width="1168" height="372" fill="url(#fadeL)"/></mask>
+    <clipPath id="inner"><rect x="16" y="10" width="1168" height="372" rx="24"/></clipPath>
+    <filter id="blob" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.1"/>
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="glassSpec" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.3" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="0.7" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glassSheen" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0.35" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.5"/>
+      <stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <mask id="glassOutside">
+      <rect width="100%" height="100%" fill="#FFF"/>
+      <rect x="16" y="10" width="1168" height="372" rx="24" fill="#000"/>
+    </mask>
+    <clipPath id="glassClip"><rect x="16" y="10" width="1168" height="372" rx="24"/></clipPath>
     <style>
       .grid line { stroke: #16A34A; stroke-opacity: 0.25; stroke-width: 1; }
       .floor { animation: roll 1.8s linear infinite; }
       @keyframes roll { from { transform: translateY(0) } to { transform: translateY(12px) } }
       .glow { animation: breathe 6s ease-in-out infinite; transform-origin: 900px 260px; }
       @keyframes breathe { 0%,100% { opacity: .75; transform: scale(1) } 50% { opacity: 1; transform: scale(1.06) } }
+      .drift { animation: drift 14s ease-in-out infinite alternate; }
+      @keyframes drift { from { transform: translate(0, 0) } to { transform: translate(140px, -40px) } }
+      .sheen { animation: sheen 9s ease-in-out infinite; animation-delay: 0s; }
+      @keyframes sheen { 0%, 55% { transform: translateX(-1168px) } 100% { transform: translateX(1168px) } }
       .hello { font: 500 18px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #71717A; letter-spacing: 3px; }
       .name { font: 600 60px Poppins,'Avenir Next',Avenir,'Segoe UI',Helvetica,Arial,sans-serif; fill: #121212; letter-spacing: .5px; }
       .bar { fill: url(#bar); animation: grow 3s ease-out infinite alternate; transform-origin: 64px 0; }
@@ -37,7 +70,13 @@
     </style>
   </defs>
 
-  <rect x="6.5" y="6.5" width="1187" height="387" rx="20" fill="#000000" fill-opacity="0.02" stroke="#000000" stroke-opacity="0.1"/>
+
+  <rect x="16" y="16" width="1168" height="372" rx="24" fill="#000" fill-opacity="0.12" filter="url(#glassShadow)" mask="url(#glassOutside)"/>
+  <rect x="16" y="10" width="1168" height="372" rx="24" fill="url(#glassFill)"/>
+  <g clip-path="url(#glassClip)"><rect class="sheen" x="16" y="10" width="1168" height="372" fill="url(#glassSheen)"/></g>
+  <g clip-path="url(#inner)">
+    <circle class="drift" cx="240" cy="330" r="130" fill="#16A34A" fill-opacity="0.064" filter="url(#blob)"/>
+  </g>
   <g clip-path="url(#inner)" mask="url(#fade)">
     <circle class="glow" cx="900" cy="260" r="230" fill="url(#sun)"/>
     <g class="grid"><g class="floor"><line x1="560" y1="261.4" x2="1180" y2="261.4"/><line x1="560" y1="265.6" x2="1180" y2="265.6"/><line x1="560" y1="272.6" x2="1180" y2="272.6"/><line x1="560" y1="282.4" x2="1180" y2="282.4"/><line x1="560" y1="295.0" x2="1180" y2="295.0"/><line x1="560" y1="310.4" x2="1180" y2="310.4"/><line x1="560" y1="328.6" x2="1180" y2="328.6"/><line x1="560" y1="349.6" x2="1180" y2="349.6"/><line x1="560" y1="373.4" x2="1180" y2="373.4"/><line x1="560" y1="400.0" x2="1180" y2="400.0"/><line x1="560" y1="429.4" x2="1180" y2="429.4"/><line x1="900" y1="260" x2="90" y2="440"/><line x1="900" y1="260" x2="180" y2="440"/><line x1="900" y1="260" x2="270" y2="440"/><line x1="900" y1="260" x2="360" y2="440"/><line x1="900" y1="260" x2="450" y2="440"/><line x1="900" y1="260" x2="540" y2="440"/><line x1="900" y1="260" x2="630" y2="440"/><line x1="900" y1="260" x2="720" y2="440"/><line x1="900" y1="260" x2="810" y2="440"/><line x1="900" y1="260" x2="900" y2="440"/><line x1="900" y1="260" x2="990" y2="440"/><line x1="900" y1="260" x2="1080" y2="440"/><line x1="900" y1="260" x2="1170" y2="440"/><line x1="900" y1="260" x2="1260" y2="440"/><line x1="900" y1="260" x2="1350" y2="440"/><line x1="900" y1="260" x2="1440" y2="440"/><line x1="900" y1="260" x2="1530" y2="440"/><line x1="900" y1="260" x2="1620" y2="440"/><line x1="900" y1="260" x2="1710" y2="440"/></g></g>
@@ -104,4 +143,7 @@
 
   <rect class="status" x="376" y="298" width="239" height="40" rx="20"/>
   <text class="statustext" x="394" y="323">☀️ 11 AM in NJ · shipping</text>
+
+  <rect x="16.5" y="10.5" width="1167" height="371" rx="24" fill="none" stroke="url(#glassEdge)"/>
+  <rect x="40" y="10.5" width="1120" height="1" fill="url(#glassSpec)"/>
 </svg>
