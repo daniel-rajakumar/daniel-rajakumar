@@ -5,7 +5,6 @@
 
 <p align="center">
   <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-202022?style=for-the-badge&logo=googlechrome&logoColor=1DB954"></a>
-  <a href="https://rockygpt.danielrajakumar.com"><img alt="RockyGPT" src="https://img.shields.io/badge/RockyGPT-live-1DB954?style=for-the-badge&logo=probot&logoColor=1DB954&labelColor=202022"></a>
   <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-202022?style=for-the-badge&logo=linkedin&logoColor=1DB954"></a>
   <a href="mailto:contact@danielrajakumar.com"><img alt="Email" src="https://img.shields.io/badge/Email-202022?style=for-the-badge&logo=gmail&logoColor=1DB954"></a>
 </p>
