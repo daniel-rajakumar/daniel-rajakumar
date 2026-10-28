@@ -1,16 +1,27 @@
-# Hi, I'm Daniel 👋
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img alt="Hi, I'm Daniel Rajakumar, a software engineer" src="assets/hero-light.svg" width="100%">
+</picture>
 
-Software engineer in New Jersey. I build full-stack web apps in TypeScript and Next.js, lately with a focus on retrieval systems and the tests that keep them honest.
+<p align="center">
+  <a href="https://www.danielrajakumar.com"><img alt="Website" src="https://img.shields.io/badge/danielrajakumar.com-0B1020?style=for-the-badge&logo=googlechrome&logoColor=22D3EE"></a>
+  <a href="https://rockygpt.danielrajakumar.com"><img alt="RockyGPT" src="https://img.shields.io/badge/RockyGPT-live-7C3AED?style=for-the-badge&logo=openai&logoColor=white"></a>
+  <a href="https://linkedin.com/in/daniel-rajakumar"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+  <a href="mailto:contact@danielrajakumar.com"><img alt="Email" src="https://img.shields.io/badge/Email-DB2777?style=for-the-badge&logo=gmail&logoColor=white"></a>
+</p>
+
+I build full-stack web apps in TypeScript and Next.js, lately with a focus on retrieval systems and the tests that keep them honest.
 
 - 🎓 B.S. in Computer Science, Ramapo College of New Jersey (2026)
 - 💼 Software engineering intern at **dsm-firmenich**, where I built and launched an internal assessment platform as the sole developer
 - 🤖 Building **[RockyGPT](https://rockygpt.danielrajakumar.com)**, a campus assistant for Ramapo that answers with linked sources
 
-[![Website](https://img.shields.io/badge/danielrajakumar.com-000000?style=flat&logo=googlechrome&logoColor=white)](https://www.danielrajakumar.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/daniel-rajakumar)
-[![Email](https://img.shields.io/badge/contact@danielrajakumar.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:contact@danielrajakumar.com)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
+  <img alt="" src="assets/divider-light.svg" width="100%">
+</picture>
 
-## What I've built
+## ⚡ What I've built
 
 | Project | What it is | Built with |
 | --- | --- | --- |
@@ -21,23 +32,33 @@ Software engineer in New Jersey. I build full-stack web apps in TypeScript and N
 | **[Image Splitter](https://github.com/daniel-rajakumar/imageSplitter)** · [try it](https://image-splitter-eight.vercel.app) | Cuts one image into a grid of tiles for Instagram carousels and profile grids. | JavaScript |
 | **[Photography](https://github.com/daniel-rajakumar/photography-website)** · [view](https://photography-website-ebon.vercel.app) | My photo gallery, with swipe filters and camera details for each shot. | Next.js, TypeScript |
 
-## Tools I use
+## 🛠️ Tools I use
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazonwebservices&logoColor=white)
+<p align="center">
+  <img alt="TypeScript, JavaScript, Python, C++, Java, Next.js, React, FastAPI, PostgreSQL, Redis, Docker, AWS" src="https://skillicons.dev/icons?i=ts,js,py,cpp,java,nextjs,react,fastapi,postgres,redis,docker,aws&perline=12">
+</p>
 
-## Outside of code
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
+  <img alt="" src="assets/divider-light.svg" width="100%">
+</picture>
+
+## 📈 My year in code
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg">
+  <img alt="My GitHub contributions as a 3D city, updated daily" src="profile-3d-contrib/profile-green-animate.svg" width="100%">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="generated/snake-dark.svg">
+  <img alt="A snake eating my GitHub contribution graph, updated daily" src="generated/snake-light.svg" width="100%">
+</picture>
+
+## 🌙 Outside of code
 
 - Led Ramapo's Google Developer Student Club and organized the college's first DevFest
 - Founded Ramapo's Computer Science Club
 - Still a big fan of the OneDark color scheme. Comic Sans, less so these days.
+
+<sub>The banner and dividers are hand-made animated SVGs (`scripts/make_art.py`). The 3D city and snake are regenerated every day by a GitHub Action.</sub>

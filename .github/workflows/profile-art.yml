@@ -1,0 +1,39 @@
+# Regenerates the live images in the profile README from the contribution
+# graph: a 3D city and a snake that eats the graph. Runs daily and on demand.
+name: Profile art
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # 09:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 3D contribution graph
+        uses: yoshi389111/github-profile-3d-contrib@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
+      - name: Snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            generated/snake-dark.svg?palette=github-dark&color_snake=#22D3EE&color_dots=#161B22,#1E2A5E,#3B3FA8,#7C3AED,#C084FC
+            generated/snake-light.svg?palette=github-light&color_snake=#7C3AED&color_dots=#EBEDF0,#C7D2FE,#A5B4FC,#818CF8,#6366F1
+
+      - name: Commit the new images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-3d-contrib generated
+          git diff --cached --quiet || git commit -m "Update profile art"
+          git push
